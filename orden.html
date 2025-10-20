@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar Orden - Cuyecitos Pastelería</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="postres/Logo-modified.png" alt="Cuyecitos Pastelería">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="productos.html">Productos</a></li>
+                    <li><a href="orden.html" class="active">Orden</a></li>
+                    <li class="cart-icon">
+                        <a href="#" id="cart-toggle">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero de Orden -->
+    <section class="orden-hero">
+        <div class="container">
+            <div class="orden-hero-content">
+                <h1>¡Estás a un paso de endulzar tu día!</h1>
+                <p>Completa tu pedido y recibe deliciosos postres artesanales</p>
+                <div class="orden-steps">
+                    <div class="step active">
+                        <span class="step-number">1</span>
+                        <span class="step-text">Carrito</span>
+                    </div>
+                    <div class="step active">
+                        <span class="step-number">2</span>
+                        <span class="step-text">Información</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <span class="step-text">Confirmación</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Orden Section - Diseño Alternativo -->
+    <section class="orden-alt">
+        <div class="container">
+            <div class="orden-alt-grid">
+                <!-- Columna Izquierda - Resumen -->
+                <div class="orden-resumen-alt">
+                    <div class="resumen-card">
+                        <h3><i class="fas fa-receipt"></i> Resumen de tu Pedido</h3>
+                        
+                        <div class="resumen-productos" id="resumen-items">
+                            <div class="empty-cart-message">
+                                <i class="fas fa-shopping-cart"></i>
+                                <p>Tu carrito está vacío</p>
+                                <a href="productos.html" class="btn btn-outline">Ver Productos</a>
+                            </div>
+                        </div>
+                        
+                        <div class="resumen-extras-alt" id="resumen-extras">
+                            <!-- Extras se agregarán aquí -->
+                        </div>
+                        
+                        <div class="resumen-totales-alt">
+                            <div class="total-line">
+                                <span>Subtotal:</span>
+                                <span id="resumen-subtotal">$0 MXN</span>
+                            </div>
+                            <div class="total-line">
+                                <span>Extras:</span>
+                                <span id="resumen-extras-total">$0 MXN</span>
+                            </div>
+                            <div class="total-line final">
+                                <span>Total:</span>
+                                <span id="resumen-total">$0 MXN</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h4><i class="fas fa-info-circle"></i> Información Importante</h4>
+                        <div class="info-items">
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Anticipación</strong>
+                                    <p>Pedidos con 24 horas de anticipación</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-truck"></i>
+                                <div>
+                                    <strong>Entrega</strong>
+                                    <p>Entregamos en Reynosa y área metropolitana</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-credit-card"></i>
+                                <div>
+                                    <strong>Pagos</strong>
+                                    <p>Aceptamos tarjeta, transferencia y efectivo</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <strong>Urgencias</strong>
+                                    <p>Llámanos al 899 123 4567</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha - Formulario -->
+                <div class="orden-formulario-alt">
+                    <div class="form-card">
+                        <h3><i class="fas fa-user-circle"></i> Información Personal</h3>
+                        <form id="form-orden">
+                            <div class="form-grid">
+                                <div class="form-group-alt">
+                                    <label for="nombre">
+                                        <i class="fas fa-user"></i>
+                                        Nombre completo *
+                                    </label>
+                                    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
+                                </div>
+                                
+                                <div class="form-group-alt">
+                                    <label for="telefono">
+                                        <i class="fas fa-phone"></i>
+                                        Teléfono *
+                                    </label>
+                                    <input type="tel" id="telefono" name="telefono" required placeholder="899 123 4567">
+                                </div>
+                                
+                                <div class="form-group-alt">
+                                    <label for="email">
+                                        <i class="fas fa-envelope"></i>
+                                        Correo electrónico *
+                                    </label>
+                                    <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h4><i class="fas fa-truck"></i> Información de Entrega</h4>
+                                <div class="form-grid">
+                                    <div class="form-group-alt">
+                                        <label for="fecha-entrega">Fecha de entrega *</label>
+                                        <input type="date" id="fecha-entrega" name="fecha-entrega" required>
+                                    </div>
+                                    
+                                    <div class="form-group-alt">
+                                        <label for="hora-entrega">Hora de entrega *</label>
+                                        <input type="time" id="hora-entrega" name="hora-entrega" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group-alt">
+                                    <label for="direccion">Dirección de entrega</label>
+                                    <textarea id="direccion" name="direccion" rows="3" placeholder="Calle, número, colonia, referencia..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Personalización -->
+                            <div class="form-section">
+                                <h4><i class="fas fa-magic"></i> Personaliza tu Pedido</h4>
+                                <p class="section-description">Haz tu pedido único con estas opciones especiales</p>
+                                
+                                <div class="personalizacion-grid">
+                                    <div class="personalizacion-item">
+                                        <input type="checkbox" id="extra-dedicatoria" name="extras[]" value="dedicatoria" data-precio="30">
+                                        <label for="extra-dedicatoria">
+                                            <div class="personalizacion-icon">
+                                                <i class="fas fa-pen-fancy"></i>
+                                            </div>
+                                            <div class="personalizacion-info">
+                                                <span class="personalizacion-nombre">Dedicatoria Especial</span>
+                                                <span class="personalizacion-desc">Mensaje personalizado</span>
+                                                <span class="personalizacion-precio">+$30</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="personalizacion-item">
+                                        <input type="checkbox" id="extra-velas" name="extras[]" value="velas" data-precio="25">
+                                        <label for="extra-velas">
+                                            <div class="personalizacion-icon">
+                                                <i class="fas fa-birthday-cake"></i>
+                                            </div>
+                                            <div class="personalizacion-info">
+                                                <span class="personalizacion-nombre">Velas Decorativas</span>
+                                                <span class="personalizacion-desc">Set de velas festivas</span>
+                                                <span class="personalizacion-precio">+$25</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="personalizacion-item">
+                                        <input type="checkbox" id="extra-chispas-colores" name="extras[]" value="chispas-colores" data-precio="20">
+                                        <label for="extra-chispas-colores">
+                                            <div class="personalizacion-icon">
+                                                <i class="fas fa-palette"></i>
+                                            </div>
+                                            <div class="personalizacion-info">
+                                                <span class="personalizacion-nombre">Chispas de Colores</span>
+                                                <span class="personalizacion-desc">Sprinkles multicolores</span>
+                                                <span class="personalizacion-precio">+$20</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="personalizacion-item">
+                                        <input type="checkbox" id="extra-fondant" name="extras[]" value="fondant" data-precio="50">
+                                        <label for="extra-fondant">
+                                            <div class="personalizacion-icon">
+                                                <i class="fas fa-crown"></i>
+                                            </div>
+                                            <div class="personalizacion-info">
+                                                <span class="personalizacion-nombre">Figura de Fondant</span>
+                                                <span class="personalizacion-desc">Decoración personalizada</span>
+                                                <span class="personalizacion-precio">+$50</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="personalizacion-item">
+                                        <input type="checkbox" id="extra-nueces" name="extras[]" value="nueces" data-precio="35">
+                                        <label for="extra-nueces">
+                                            <div class="personalizacion-icon">
+                                                <i class="fas fa-seedling"></i>
+                                            </div>
+                                            <div class="personalizacion-info">
+                                                <span class="personalizacion-nombre">Mix de Nueces</span>
+                                                <span class="personalizacion-desc">Nueces y almendras</span>
+                                                <span class="personalizacion-precio">+$35</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="personalizacion-item">
+                                        <input type="checkbox" id="extra-frutas-frescas" name="extras[]" value="frutas-frescas" data-precio="40">
+                                        <label for="extra-frutas-frescas">
+                                            <div class="personalizacion-icon">
+                                                <i class="fas fa-apple-alt"></i>
+                                            </div>
+                                            <div class="personalizacion-info">
+                                                <span class="personalizacion-nombre">Frutas Frescas</span>
+                                                <span class="personalizacion-desc">Fresas, kiwi, durazno</span>
+                                                <span class="personalizacion-precio">+$40</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="extras-total-alt">
+                                    <span>Total de personalización:</span>
+                                    <span id="extras-total">$0 MXN</span>
+                                </div>
+                            </div>
+
+                            <!-- Mensaje Especial -->
+                            <div class="form-section">
+                                <h4><i class="fas fa-comment-dots"></i> Mensaje Especial (Opcional)</h4>
+                                <div class="form-group-alt">
+                                    <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe aquí tu dedicatoria, instrucciones especiales, alergias, o cualquier mensaje que quieras compartir con nosotros..."></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-enviar-alt">
+                                <i class="fas fa-paper-plane"></i>
+                                Confirmar Pedido
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="postres/Logo-modified.png" alt="Cuyecitos Pastelería">
+                    <p>Endulzando tus momentos especiales desde 2015</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="productos.html">Productos</a></li>
+                        <li><a href="orden.html">Orden</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contacto">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Jarachina norte #469, Reynosa Tamaulipas</p>
+                    <p><i class="fas fa-phone"></i> 55 1234 5678</p>
+                    <p><i class="fas fa-envelope"></i> hola@cuyecitos.com</p>
+                </div>
+                <div class="footer-redes">
+                    <h4>Síguenos</h4>
+                    <div class="redes-sociales">
+                        <a href="https://www.facebook.com/?locale=es_LA"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/es-419/"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/528992304688?text=Hola%20Cuyecitos%2C%20quiero%20más%20información" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Cuyecitos Pastelería. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Carrito de Compras -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+        </div>
+        <div class="cart-total">
+            <p>Total: <span id="cart-total">$0 MXN</span></p>
+            <button class="btn-checkout" id="checkout-btn">Realizar Pedido</button>
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Pancracio</h3>
+            <p>Asistente Virtual</p>
+            <button class="close-chatbot" id="close-chatbot">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot-message">
+                <p>¡Hola! Soy Pancracio, el asistente virtual de Cuyecitos. ¿En qué puedo ayudarte hoy?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Escribe tu pregunta...">
+            <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Botón para abrir el chatbot -->
+    <button class="chatbot-toggle" id="chatbot-toggle">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

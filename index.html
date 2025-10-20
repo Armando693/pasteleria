@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuyecitos - Pastelería Artesanal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+    <div class="container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="postres/Logo-modified.png" alt="Cuyecitos Pastelería">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="orden.html">Orden</a></li>
+                <li class="cart-icon">
+                    <a href="#" id="cart-toggle">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-slides">
+        <img src="postres/postre.jpg" alt="Postre1">
+        <img src="postres/postre2.jpg" alt="Postre2">
+        <img src="postres/postre4.jpg" alt="postre3">
+        <img src="postres/postre3.png" alt="Postre4">
+        <img src="postres/Matcha-Cupcakes.jpg" alt="Postre5">
+        <img src="postres/postre5.jpg" alt="Postre6">
+        <img src="postres/pexels-myfoodie-2693447.jpg" alt="Postre7">
+        <img src="postres/pexels-suzyhazelwood-1126359.jpg" alt="Postre8">
+        <img src="postres/pexels-marta-dzedyshko-1042863-2067396.jpg" alt="Postre9">
+        <img src="postres/pexels-leigh-patrick-14477-298217.jpg" alt="Postre10">
+    </div>
+    <div class="hero-content">
+        <h1>Dulces momentos en cada bocado</h1>
+        <p>Descubre nuestros deliciosos postres artesanales hechos con amor y los mejores ingredientes</p>
+        <a href="productos.html" class="btn">Ver Productos</a>
+    </div>
+</section>
+    <!-- Ofertas Section -->
+    <section class="ofertas">
+        <div class="container">
+            <h2>Ofertas Especiales</h2>
+            <div class="ofertas-grid">
+                <div class="oferta-item">
+                    <img src="postres/galletas-decoradas.jpg" alt="Galletas Decoradas">
+                    <h3>Galletas Decoradas</h3>
+                    <p class="precio">$120 MXN (6 pzas)</p>
+                   <button class="btn-agregar" data-producto="Galletas Decoradas" data-precio="120"><i class="fas fa-shopping-cart"></i></button>
+                </div>
+                <div class="oferta-item">
+                    <img src="postres/pastel-fresa.jpg" alt="Pastel de Fresa">
+                    <h3>Pastel de Fresa</h3>
+                    <p class="precio">$350 MXN</p>
+                    <button class="btn-agregar" data-producto="Pastel de Fresa" data-precio="350"><i class="fas fa-shopping-cart"></i></button>
+                </div>
+                <div class="oferta-item">
+                    <img src="postres/pay-de-queso.jpeg" alt="Pay de Queso">
+                    <h3>Pay de Queso</h3>
+                    <p class="precio">$280 MXN</p>
+                    <button class="btn-agregar" data-producto="Pay de Queso" data-precio="280"><i class="fas fa-shopping-cart"></i></button>
+                </div>
+                <div class="oferta-item">
+                    <img src="postres/pastelitos.jpg" alt="Cupcakes">
+                    <h3>Cupcakes</h3>
+                    <p class="precio">$180 MXN (6 pzas)</p>
+                    <button class="btn-agregar" data-producto="Cupcakes" data-precio="180"><i class="fas fa-shopping-cart"></i></button>
+                </div>
+                <div class="oferta-item">
+                    <img src="postres/tarta-de-chocolate-y-fresas-naturales copy.jpg" alt="Pastel de Chocolate">
+                    <h3>Pastel de Chocolate</h3>
+                    <p class="precio">$280 MXN</p>
+                    <button class="btn-agregar" data-producto="Pastel de Chocolate" data-precio="380"><i class="fas fa-shopping-cart"></i></button>
+                </div>
+                <div class="oferta-item">
+                    <img src="postres/pastel-vainilla.png" alt="Pastel de Vainilla">
+                    <h3>Pastel de Vainilla</h3>
+                    <p class="precio">$120 MXN</p>
+                    <button class="btn-agregar" data-producto="Pastel de Vainilla" data-precio="320"><i class="fas fa-shopping-cart"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nosotros -->
+    <section class="sobre-nosotros">
+        <div class="container">
+            <div class="sobre-content">
+                <div class="sobre-texto">
+                    <h2>Sobre Cuyecitos</h2>
+                    <p>En Cuyecitos nos apasiona crear los postres más deliciosos que endulcen tus momentos especiales. Desde 2015, hemos estado elaborando pasteles, galletas y postres artesanales con ingredientes de la más alta calidad.</p>
+                    <p>Nuestro equipo de chefs pasteleros combina técnicas tradicionales con toques innovadores para ofrecerte sabores únicos que te harán volver por más.</p>
+                    <div class="valores">
+                        <div class="valor">
+                            <i class="fas fa-heart"></i>
+                            <h4>Hecho con Amor</h4>
+                        </div>
+                        <div class="valor">
+                            <i class="fas fa-leaf"></i>
+                            <h4>Ingredientes Frescos</h4>
+                        </div>
+                        <div class="valor">
+                            <i class="fas fa-award"></i>
+                            <h4>Calidad Garantizada</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="sobre-imagen">
+                    <img src="postres/Logo-modified.png" alt="Sobre Cuyecitos">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonios -->
+    <section class="testimonios">
+        <div class="container">
+            <h2>Lo que Dicen Nuestros Clientes</h2>
+            <p class="testimonios-subtitle">Descubre por qué nos eligen una y otra vez</p>
+            
+            <div class="testimonios-grid">
+                <div class="testimonio-item">
+                    <div class="testimonio-content">
+                        <div class="testimonio-text">
+                            <p>"Los pasteles de Cuyecitos son increíbles! Pedí el de chocolate para el cumpleaños de mi hija y quedó delicioso. Todos mis invitados preguntaron dónde lo compré."</p>
+                        </div>
+                        <div class="testimonio-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>María González</h4>
+                                <p>Cliente frecuente</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonio-item">
+                    <div class="testimonio-content">
+                        <div class="testimonio-text">
+                            <p>"Las galletas decoradas son una obra de arte! Las encargué para el bautizo de mi sobrino y fueron el centro de atención. Además deliciosas!"</p>
+                        </div>
+                        <div class="testimonio-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>Carlos Rodríguez</h4>
+                                <p>Cliente desde 2022</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonio-item">
+                    <div class="testimonio-content">
+                        <div class="testimonio-text">
+                            <p>"El servicio excepcional y la calidad de sus productos me tienen enamorada. Siempre que hay una celebración en casa, Cuyecitos es nuestra opción."</p>
+                        </div>
+                        <div class="testimonio-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>Ana Martínez</h4>
+                                <p>Cliente premium</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonio-item">
+                    <div class="testimonio-content">
+                        <div class="testimonio-text">
+                            <p>"Los cupcakes son adictivos! Pedí para la oficina y en 10 minutos ya no quedaba ninguno. El balance perfecto entre sabor y presentación."</p>
+                        </div>
+                        <div class="testimonio-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>Roberto Sánchez</h4>
+                                <p>Cliente corporativo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonio-item">
+                    <div class="testimonio-content">
+                        <div class="testimonio-text">
+                            <p>"La rosca de reyes fue un éxito total! Nunca había probado una tan esponjosa y con tanta fruta. Definitivamente será nuestra tradición anual."</p>
+                        </div>
+                        <div class="testimonio-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>Laura Hernández</h4>
+                                <p>Cliente estacional</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonio-item">
+                    <div class="testimonio-content">
+                        <div class="testimonio-text">
+                            <p>"La personalización que ofrecen es increíble. Pude diseñar mi propio pastel de boda y quedó exactamente como lo soñé. ¡Gracias Cuyecitos!"</p>
+                        </div>
+                        <div class="testimonio-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>Patricia López</h4>
+                                <p>Novia satisfecha</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<section class="informacion-adicional section-padding">
+    <div class="container">
+        <h2 class="section-title">Información Adicional</h2>
+        
+        <!-- Servicios -->
+        <div class="servicios-grid">
+            <div class="servicio-item">
+                <div class="servicio-icon">
+                    <i class="fas fa-motorcycle"></i>
+                </div>
+                <h3>Entrega a Domicilio</h3>
+                <p>Llevamos tus postres favoritos hasta la puerta de tu casa. Servicio rápido y confiable en toda la ciudad.</p>
+                <ul class="servicio-details">
+                    <li><i class="fas fa-check"></i> Entrega en 30-45 minutos</li>
+                    <li><i class="fas fa-check"></i> Sin costo en pedidos mayores a $200</li>
+                    <li><i class="fas fa-check"></i> Seguimiento en tiempo real</li>
+                </ul>
+            </div>
+            
+            <div class="servicio-item">
+                <div class="servicio-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3>Personalización de Pedidos</h3>
+                <p>Creamos postres únicos adaptados a tus gustos y necesidades especiales.</p>
+                <ul class="servicio-details">
+                    <li><i class="fas fa-check"></i> Diseños personalizados</li>
+                    <li><i class="fas fa-check"></i> Opciones sin azúcar</li>
+                    <li><i class="fas fa-check"></i> Ingredientes especiales</li>
+                    <li><i class="fas fa-check"></i> Mensajes y dedicatorias</li>
+                </ul>
+            </div>
+            
+            <div class="servicio-item">
+                <div class="servicio-icon">
+                    <i class="fas fa-glass-cheers"></i>
+                </div>
+                <h3>Catering para Eventos</h3>
+                <p>Hacemos de tus eventos momentos inolvidables con nuestra repostería gourmet.</p>
+                <ul class="servicio-details">
+                    <li><i class="fas fa-check"></i> Bodas y XV años</li>
+                    <li><i class="fas fa-check"></i> Eventos corporativos</li>
+                    <li><i class="fas fa-check"></i> Fiestas infantiles</li>
+                    <li><i class="fas fa-check"></i> Mesas de postres completas</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Certificaciones y Premios -->
+        <div class="certificaciones-section">
+            <h3 class="certificaciones-title">Certificaciones y Reconocimientos</h3>
+            <div class="certificaciones-grid">
+                <div class="certificacion-item">
+                    <div class="certificacion-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h4>Premio Excelencia Repostera 2023</h4>
+                    <p>Reconocimiento a la calidad e innovación en repostería contemporánea</p>
+                </div>
+                
+                <div class="certificacion-item">
+                    <div class="certificacion-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h4>Certificación ISO 9001</h4>
+                    <p>Garantía de procesos de calidad en la elaboración de todos nuestros productos</p>
+                </div>
+                
+                <div class="certificacion-item">
+                    <div class="certificacion-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4>Colaboración con Chef Internacional</h4>
+                    <p>Alianza estratégica con el reconocido pastelero francés Pierre Dubois</p>
+                </div>
+                
+                <div class="certificacion-item">
+                    <div class="certificacion-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h4>Certificación Orgánica</h4>
+                    <p>Uso de ingredientes orgánicos y sostenibles en nuestras preparaciones</p>
+                </div>
+                 <div class="certificacion-item">
+                    <div class="certificacion-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Premio al Mejor Servicio</h4>
+                    <p>Reconocimiento por atención al cliente</p>
+                </div>
+                
+                <div class="certificacion-item">
+                    <div class="certificacion-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h4>Empresa Eco-Friendly</h4>
+                    <p>Comprometidos con el medio ambiente</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+                <section class="nuestro-equipo section-padding">
+    <div class="container">
+        <h2 class="section-title">Nuestro Equipo</h2>
+        <p class="equipo-subtitle">Conoce a las personas que hacen posible cada dulce momento</p>
+        
+        <div class="equipo-grid">
+            <!-- Anette Guadalupe -->
+            <div class="miembro-equipo">
+                <div class="miembro-foto">
+                    <img src="postres/yo.jpg" alt="Anette Guadalupe - Pastelera Principal">
+                </div>
+                <h3>Anette Guadalupe</h3>
+                <p class="miembro-rol">Pastelera Principal</p>
+                <p class="miembro-desc">Especialista en repostería creativa y diseño de postres únicos.</p>
+            </div>
+            
+            <!-- Jose Armando -->
+            <div class="miembro-equipo">
+                <div class="miembro-foto">
+                    <div class="foto-placeholder">
+                        <img src="postres/armando.jpg" alt="Jose Armando - Chef Repostero">
+                    </div>
+                </div>
+                <h3>Jose Armando</h3>
+                <p class="miembro-rol">Chef Repostero</p>
+                <p class="miembro-desc">Maestro en técnicas tradicionales y sabores auténticos.</p>
+            </div>
+            
+            <!-- Maria Fernanda -->
+            <div class="miembro-equipo">
+                <div class="miembro-foto">
+                    <div class="foto-placeholder">
+                        <img src="postres/mari.jpg" alt="aria Fernanda - Atención al Cliente">
+                    </div>
+                </div>
+                <h3>Maria Fernanda</h3>
+                <p class="miembro-rol">Atención al Cliente</p>
+                <p class="miembro-desc">Siempre dispuesta a hacer tu experiencia dulce y memorable.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Ubicación -->
+    <section class="ubicacion">
+        <div class="container">
+            <h2>Nuestra Ubicación</h2>
+            <div class="ubicacion-content">
+                <div class="mapa">
+                    <!-- Aquí iría un mapa de Google Maps -->
+                    <div id="map" style="height: 400px; width: 100%;"></div>
+                        <!-- Google Maps API -->
+                        <script src="https://maps.app.goo.gl/VdDT3MM41K6UtVWaA" async defer></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="postres/Logo-modified.png" alt="Cuyecitos Pastelería">
+                    <p>Endulzando tus momentos especiales desde 2015</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="productos.html">Productos</a></li>
+                        <li><a href="orden.html">Orden</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contacto">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Jarachina norte #469, Reynosa Tamaulipas</p>
+                    <p><i class="fas fa-phone"></i> 55 1234 5678</p>
+                    <p><i class="fas fa-envelope"></i> hola@cuyecitos.com</p>
+                </div>
+                <div class="footer-redes">
+                    <h4>Síguenos</h4>
+                    <div class="redes-sociales">
+                        <a href="https://www.facebook.com/?locale=es_LA"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/es-419/"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/528992304688?text=Hola%20Cuyecitos%2C%20quiero%20más%20información" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Cuyecitos Pastelería. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Carrito de Compras -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Los productos del carrito se agregarán aquí dinámicamente -->
+        </div>
+        <div class="cart-total">
+            <p>Total: <span id="cart-total">$0 MXN</span></p>
+            <button class="btn-checkout" id="checkout-btn">Realizar Pedido</button>
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Pancracio</h3>
+            <p>Asistente Virtual</p>
+            <button class="close-chatbot" id="close-chatbot">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot-message">
+                <p>¡Hola! Soy Pancracio, el asistente virtual de Cuyecitos. ¿En qué puedo ayudarte hoy?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Escribe tu pregunta...">
+            <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Botón para abrir el chatbot -->
+    <button class="chatbot-toggle" id="chatbot-toggle">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
