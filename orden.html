@@ -375,16 +375,31 @@
     <script src="script.js"></script>
 
 
-     <!-- FIREBASE -->
-<script type="module">
-  import { db } from "./firebase.js";
-  import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+      
+</script>
+<!-- SDK de Firebase -->
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
 
-  // Escuchar el envío del formulario
+<script>
+  // Configuración de Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
+    authDomain: "cuyecitosbd-49824.firebaseapp.com",
+    projectId: "cuyecitosbd-49824",
+    storageBucket: "cuyecitosbd-49824.firebasestorage.app",
+    messagingSenderId: "612701891221",
+    appId: "1:612701891221:web:2018fc11f6bb77b96f499c"
+  };
+
+  // Inicializar Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // Escuchar el formulario
   document.getElementById("form-orden").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Obtener valores del formulario
     const nombre = document.getElementById("nombre").value;
     const telefono = document.getElementById("telefono").value;
     const email = document.getElementById("email").value;
@@ -392,26 +407,21 @@
     const horaEntrega = document.getElementById("hora-entrega").value;
     const direccion = document.getElementById("direccion").value;
     const mensaje = document.getElementById("mensaje").value;
-
-    // Obtener los extras seleccionados
     const extras = Array.from(document.querySelectorAll("input[name='extras[]']:checked")).map(e => e.value);
 
-    // Crear el objeto del pedido
-    const pedido = {
-      nombre,
-      telefono,
-      email,
-      fechaEntrega,
-      horaEntrega,
-      direccion,
-      extras,
-      mensaje,
-      fechaRegistro: new Date().toISOString()
-    };
-
     try {
-      // Guardar en Firestore
-      await addDoc(collection(db, "pedidos"), pedido);
+      await db.collection("pedidos").add({
+        nombre,
+        telefono,
+        email,
+        fechaEntrega,
+        horaEntrega,
+        direccion,
+        extras,
+        mensaje,
+        fechaRegistro: new Date().toISOString()
+      });
+
       alert("🎉 Pedido enviado correctamente. ¡Gracias por confiar en Cuyecitos!");
       document.getElementById("form-orden").reset();
     } catch (error) {
