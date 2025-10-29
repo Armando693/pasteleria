@@ -25,7 +25,7 @@
 
       <div class="forget">
         <label><input type="checkbox">Recordar</label>
-        <a href="#">Olvidé la contraseña</a>
+        <a href="#" id="resetPasswordLink">Olvidé la contraseña</a>
       </div>
 
       <button type="submit">Iniciar</button>
@@ -40,20 +40,23 @@
   <script type="module">
     // Importar módulos de Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
     // Configuración de tu proyecto Firebase
-   const firebaseConfig = {
+    const firebaseConfig = {
       apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
       authDomain: "cuyecitosbd-49824.firebaseapp.com",
-      projectId:  "cuyecitosbd-49824",
+      projectId: "cuyecitosbd-49824",
+      storageBucket: "cuyecitosbd-49824.appspot.com",
+      messagingSenderId: "469768470210",
+      appId: "1:469768470210:web:d9e7f7dc6cf57365c08a6c"
     };
 
     // Inicializar Firebase y Auth
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // Manejo del formulario
+    // --- INICIO DE SESIÓN ---
     const form = document.getElementById("loginForm");
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -63,12 +66,26 @@
 
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-
         alert(`¡Bienvenido, ${email}! 🎉`);
         window.location.href = "index.html"; // Redirige a tu página principal
       } catch (error) {
         alert("Error al iniciar sesión: " + error.message);
+      }
+    });
+
+    // --- REESTABLECER CONTRASEÑA ---
+    const resetLink = document.getElementById("resetPasswordLink");
+    resetLink.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      const email = prompt("💌 Ingresa tu correo para restablecer la contraseña:");
+      if (!email) return;
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        alert("✅ Se envió un correo para restablecer tu contraseña. Revisa tu bandeja de entrada.");
+      } catch (error) {
+        alert("❌ Error: " + error.message);
       }
     });
   </script>
