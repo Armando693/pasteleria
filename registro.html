@@ -1,51 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Registro</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Registro</title>
 </head>
 <body>
 
-    <form id="registroForm">
-        <h2>Registro</h2>
+  <form id="registroForm">
+    <h2>Registro</h2>
 
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
 
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" required>
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" name="apellido" required>
 
-        <label for="email">Correo electrónico:</label>
-        <input type="email" id="email" name="email" required>
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" name="email" required>
 
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required minlength="6">
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password" required minlength="6">
 
-        <label for="confirmPassword">Verificar contraseña:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
+    <label for="confirmPassword">Verificar contraseña:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
 
-        <p class="error" id="errorMensaje"></p>
+    <p class="error" id="errorMensaje"></p>
 
-        <button type="submit">Registrarse</button>
-    </form>
+    <button type="submit">Registrarse</button>
+  </form>
 
-    <script>
-        const form = document.getElementById('registroForm');
-        const password = document.getElementById('password');
-        const confirmPassword = document.getElementById('confirmPassword');
-        const errorMensaje = document.getElementById('errorMensaje');
+  <!-- Firebase SDK -->
+  <script type="module">
+    // Importar módulos de Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-        form.addEventListener('submit', (e) => {
-            if (password.value !== confirmPassword.value) {
-                e.preventDefault(); // Evita el envío del formulario
-                errorMensaje.textContent = "Las contraseñas no coinciden.";
-            } else {
-                errorMensaje.textContent = "";
-                alert("Registro exitoso 🎉");
-            }
+    // Configuración de tu proyecto Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
+      authDomain: "cuyecitosbd-49824.firebaseapp.com",
+      projectId:  "cuyecitosbd-49824",
+    };
+
+    // Inicializar Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    // Referencias al formulario
+    const form = document.getElementById("registroForm");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+    const errorMensaje = document.getElementById("errorMensaje");
+
+    // Evento submit
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (password.value !== confirmPassword.value) {
+        errorMensaje.textContent = "Las contraseñas no coinciden.";
+        return;
+      }
+
+      errorMensaje.textContent = "";
+
+      const nombre = document.getElementById("nombre").value;
+      const apellido = document.getElementById("apellido").value;
+      const email = document.getElementById("email").value;
+      const pass = password.value;
+
+      try {
+        // Crear usuario en Authentication
+        const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+        const user = userCredential.user;
+
+        // Guardar datos en Firestore
+        await addDoc(collection(db, "usuarios"), {
+          uid: user.uid,
+          nombre: nombre,
+          apellido: apellido,
+          email: email,
+          creadoEn: new Date()
         });
-    </script>
+
+        alert("Registro exitoso 🎉");
+        form.reset();
+        window.location.href = "login.html"; // Redirigir al login
+      } catch (error) {
+        console.error(error);
+        errorMensaje.textContent = "Error al registrar: " + error.message;
+      }
+    });
+  </script>
 
 </body>
 </html>

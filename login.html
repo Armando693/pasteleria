@@ -1,38 +1,80 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Inicio de sesión</title>
-    <link rel="stylesheet" href="loggin.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio de sesión</title>
+  <link rel="stylesheet" href="loggin.css">
 </head>
-
 <body>
-    <section>
-        <form>
-            <h1>Inicio</h1>
-            <div class="inputbox">
-                <ion-icon name="mail-outline"></ion-icon>
-                <input type="email" required>
-                <label for="">Usuario</label>
-            </div>
-            <div class="inputbox">
-                
-                <ion-icon name="lock-closed-outline"></ion-icon>
-                <input type="password" required>
-                <label for="">Contraseña</label>
-            </div>
-            <div class="forget">
-                <label for=""><input type="checkbox">Recordar</label>
-                <a href="#">Olvidé la contraseña</a>
-            </div>
-            <button>Iniciar</button>
-            <div class="register">
-                <p>No tengo una cuenta <a href="#">Registrate</a></p>
-            </div>
-        </form>
-    </section>
-</body>
+  <section>
+    <form id="loginForm">
+      <h1>Inicio</h1>
 
+      <div class="inputbox">
+        <ion-icon name="mail-outline"></ion-icon>
+        <input type="email" id="email" required />
+        <label for="">Usuario</label>
+      </div>
+
+      <div class="inputbox">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <input type="password" id="password" required />
+        <label for="">Contraseña</label>
+      </div>
+
+      <div class="forget">
+        <label><input type="checkbox">Recordar</label>
+        <a href="#">Olvidé la contraseña</a>
+      </div>
+
+      <button type="submit">Iniciar</button>
+
+      <div class="register">
+        <p>No tengo una cuenta <a href="registro.html">Regístrate</a></p>
+      </div>
+    </form>
+  </section>
+
+  <!-- Firebase (SDK modular moderno) -->
+  <script type="module">
+    // Importar módulos de Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    // Configuración de tu proyecto Firebase
+    const firebaseConfig = {
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_AUTH_DOMAIN",
+      projectId: "TU_PROJECT_ID",
+    };
+
+    // Inicializar Firebase y Auth
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Manejo del formulario
+    const form = document.getElementById("loginForm");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        alert(`¡Bienvenido, ${email}! 🎉`);
+        window.location.href = "index.html"; // Redirige a tu página principal
+      } catch (error) {
+        alert("Error al iniciar sesión: " + error.message);
+      }
+    });
+  </script>
+
+  <!-- Iconos -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
 </html>
