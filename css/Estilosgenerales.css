@@ -112,15 +112,6 @@ nav ul li a:hover, nav ul li a.active {
     align-items: center;
     font-size: 12px;
 }
-.chef-icon {
-    font-size: 2rem; /* 32px */
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-.chef-icon:hover {
-    transform: scale(1.2);
-}
 /* Hero Section */
 .hero {
     position: relative;
