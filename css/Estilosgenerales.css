@@ -112,6 +112,10 @@ nav ul li a:hover, nav ul li a.active {
     align-items: center;
     font-size: 12px;
 }
+.chef-icon {
+    font-size: 40px; /* Tamaño exacto */
+    display: inline-block;
+}
 /* Hero Section */
 .hero {
     position: relative;
