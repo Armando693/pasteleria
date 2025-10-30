@@ -113,8 +113,13 @@ nav ul li a:hover, nav ul li a.active {
     font-size: 12px;
 }
 .chef-icon {
-    font-size: 40px; /* Tamaño exacto */
+    font-size: 2rem; /* 32px */
     display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.chef-icon:hover {
+    transform: scale(1.2);
 }
 /* Hero Section */
 .hero {
