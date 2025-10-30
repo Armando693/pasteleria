@@ -1,0 +1,76 @@
+/* Ofertas Section */
+.ofertas {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.ofertas h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    color: #333;
+    position: relative;
+}
+
+.ofertas h2:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: #ff6b8b;
+    margin: 15px auto;
+}
+
+.ofertas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.oferta-item {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.oferta-item:hover {
+    transform: translateY(-10px);
+}
+
+.oferta-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.oferta-item h3 {
+    margin: 15px 0 10px;
+    font-size: 1.3rem;
+    color: #333;
+}
+
+.oferta-item .precio {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ff6b8b;
+    margin-bottom: 15px;
+}
+
+.btn-agregar {
+    background-color: #ff6b8b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-agregar:hover {
+    background-color: #ff4d73;
+}

@@ -1,0 +1,431 @@
+/* Orden */
+/* Hero de Orden */
+.orden-hero {
+    background: linear-gradient(135deg, #ff6b8b 0%, #ff8fa3 100%);
+    color: white;
+    padding: 60px 0 40px;
+    text-align: center;
+}
+
+.orden-hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.orden-hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.orden-steps {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.step.active .step-number {
+    background: white;
+    color: #ff6b8b;
+    border-color: white;
+}
+
+.step-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Layout Principal*/
+.orden-alt {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.orden-alt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Columna Resumen */
+.orden-resumen-alt {
+    position: sticky;
+    top: 100px;
+}
+
+.resumen-card, .info-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+    border: 1px solid #f0f0f0;
+}
+
+.resumen-card h3, .info-card h4 {
+    color: #333;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.3rem;
+}
+
+.resumen-card h3 i, .info-card h4 i {
+    color: #ff6b8b;
+}
+
+.empty-cart-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.empty-cart-message i {
+    font-size: 3rem;
+    color: #ddd;
+    margin-bottom: 15px;
+}
+
+.empty-cart-message p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #ff6b8b;
+    color: #ff6b8b;
+    padding: 10px 25px;
+}
+
+.btn-outline:hover {
+    background: #ff6b8b;
+    color: white;
+}
+
+.resumen-totales-alt {
+    border-top: 2px solid #f0f0f0;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.total-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.total-line.final {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ff6b8b;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.info-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.info-item i {
+    color: #ff6b8b;
+    margin-top: 3px;
+    font-size: 1.1rem;
+}
+
+.info-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.info-item p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Columna Formulario */
+.orden-formulario-alt {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.form-card {
+    padding: 40px;
+}
+
+.form-card h3 {
+    color: #333;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.4rem;
+}
+
+.form-card h3 i {
+    color: #ff6b8b;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-section {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.form-section h4 {
+    color: #333;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.form-section h4 i {
+    color: #ff6b8b;
+}
+
+.section-description {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+/* Botón de Envío */
+.btn-enviar-alt {
+    width: 100%;
+    background: linear-gradient(135deg, #ff6b8b, #ff8fa3);
+    color: white;
+    border: none;
+    padding: 18px 30px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.btn-enviar-alt:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 107, 139, 0.3);
+}
+/* Estilos para el nuevo diseño de resumen */
+.resumen-item-alt {
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.resumen-item-alt:last-child {
+    border-bottom: none;
+}
+
+.resumen-item-content-alt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.resumen-item-info {
+    flex: 1;
+}
+
+.resumen-item-info strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.resumen-item-info span {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.resumen-item-precio {
+    font-weight: 600;
+    color: #ff6b8b;
+}
+
+.remove-resumen-item-alt {
+    background: none;
+    border: none;
+    color: #ff6b8b;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.remove-resumen-item-alt:hover {
+    background: #ff6b8b;
+    color: white;
+}
+
+/* Estilos para extras en el resumen */
+.extra-resumen-item-alt {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.extra-resumen-item-alt:last-child {
+    border-bottom: none;
+}
+
+.extra-resumen-content-alt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.extra-resumen-content-alt span:first-child {
+    flex: 1;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.extra-resumen-content-alt span:last-child {
+    font-weight: 600;
+    color: #ff6b8b;
+}
+
+.remove-extra-item-alt {
+    background: none;
+    border: none;
+    color: #ff6b8b;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.remove-extra-item-alt:hover {
+    background: #ff6b8b;
+    color: white;
+}
+
+/* Asegurar que los checkboxes de personalización funcionen */
+.personalizacion-item input[type="checkbox"]:checked + label .personalizacion-icon {
+    background: linear-gradient(135deg, #ff6b8b, #ff4d73);
+    transform: scale(1.05);
+}
+
+.personalizacion-item input[type="checkbox"]:checked + label .personalizacion-nombre {
+    color: #ff6b8b;
+}
+/* Mejoras para el resumen de la orden */
+.resumen-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.resumen-item-content {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.remove-resumen-item {
+    background: none;
+    border: none;
+    color: #ff6b8b;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.remove-resumen-item:hover {
+    background-color: #ff6b8b;
+    color: white;
+}
+
+.extra-resumen-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.extra-resumen-content {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.remove-extra-item {
+    background: none;
+    border: none;
+    color: #ff6b8b;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+}
+
+.remove-extra-item:hover {
+    background-color: #ff6b8b;
+    color: white;
+}
