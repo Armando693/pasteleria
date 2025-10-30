@@ -1,0 +1,230 @@
+/* loggin.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #ffd6e7 0%, #fff9c4 50%, #e1f5fe 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 100%;
+    max-width: 450px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    color: #e91e63;
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #e91e63, #ff9800);
+    border-radius: 2px;
+}
+
+.inputbox {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.inputbox ion-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #e91e63;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.inputbox input {
+    width: 100%;
+    padding: 15px 15px 15px 50px;
+    border: 2px solid #ffe0f0;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 1em;
+    color: #333;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.inputbox input:focus {
+    border-color: #e91e63;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+}
+
+.inputbox input:focus + label,
+.inputbox input:valid + label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.8em;
+    background: white;
+    padding: 0 8px;
+    color: #e91e63;
+}
+
+.inputbox label {
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 1em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.forget {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.9em;
+}
+
+.forget label {
+    display: flex;
+    align-items: center;
+    color: #666;
+    cursor: pointer;
+}
+
+.forget input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: #e91e63;
+}
+
+.forget a {
+    color: #e91e63;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forget a:hover {
+    color: #ff9800;
+    text-decoration: underline;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e91e63, #ff9800);
+    color: white;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+    background: linear-gradient(135deg, #d81b60, #f57c00);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.register {
+    text-align: center;
+    margin-top: 25px;
+    color: #666;
+}
+
+.register a {
+    color: #e91e63;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.register a:hover {
+    color: #ff9800;
+    text-decoration: underline;
+}
+
+/* Efectos decorativos pasteleros */
+section::before {
+    content: '🍰';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    font-size: 2em;
+    background: white;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+section::after {
+    content: '🎂';
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    font-size: 2em;
+    background: white;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    section {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    .forget {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    section::before,
+    section::after {
+        display: none;
+    }
+}
