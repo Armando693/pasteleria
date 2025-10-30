@@ -1,11 +1,4 @@
-/* loggin.css */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
+/* Estilos específicos para login */
 body {
     background: linear-gradient(135deg, #ffd6e7 0%, #fff9c4 50%, #e1f5fe 100%);
     min-height: 100vh;
@@ -33,12 +26,11 @@ section:hover {
 }
 
 h1 {
-    color: #e91e63;
+    color: #ff6b8b;
     text-align: center;
     font-size: 2.5em;
     margin-bottom: 30px;
     font-weight: 600;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
 }
 
@@ -50,7 +42,7 @@ h1::after {
     transform: translateX(-50%);
     width: 60px;
     height: 3px;
-    background: linear-gradient(90deg, #e91e63, #ff9800);
+    background: linear-gradient(90deg, #ff6b8b, #ffa726);
     border-radius: 2px;
 }
 
@@ -64,7 +56,7 @@ h1::after {
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #e91e63;
+    color: #ff6b8b;
     font-size: 1.2em;
     transition: color 0.3s ease;
 }
@@ -79,12 +71,13 @@ h1::after {
     color: #333;
     transition: all 0.3s ease;
     outline: none;
+    font-family: 'Poppins', sans-serif;
 }
 
 .inputbox input:focus {
-    border-color: #e91e63;
+    border-color: #ff6b8b;
     background: white;
-    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+    box-shadow: 0 0 0 3px rgba(255, 107, 139, 0.1);
 }
 
 .inputbox input:focus + label,
@@ -94,7 +87,7 @@ h1::after {
     font-size: 0.8em;
     background: white;
     padding: 0 8px;
-    color: #e91e63;
+    color: #ff6b8b;
 }
 
 .inputbox label {
@@ -106,6 +99,7 @@ h1::after {
     font-size: 1em;
     pointer-events: none;
     transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
 }
 
 .forget {
@@ -121,21 +115,23 @@ h1::after {
     align-items: center;
     color: #666;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif;
 }
 
 .forget input[type="checkbox"] {
     margin-right: 8px;
-    accent-color: #e91e63;
+    accent-color: #ff6b8b;
 }
 
 .forget a {
-    color: #e91e63;
+    color: #ff6b8b;
     text-decoration: none;
     transition: color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
 }
 
 .forget a:hover {
-    color: #ff9800;
+    color: #ff4d73;
     text-decoration: underline;
 }
 
@@ -143,24 +139,21 @@ button {
     width: 100%;
     padding: 15px;
     border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #e91e63, #ff9800);
+    border-radius: 30px;
+    background-color: #ff6b8b;
     color: white;
     font-size: 1.1em;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+    box-shadow: 0 5px 15px rgba(255, 107, 139, 0.3);
+    font-family: 'Poppins', sans-serif;
 }
 
 button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
-    background: linear-gradient(135deg, #d81b60, #f57c00);
-}
-
-button:active {
-    transform: translateY(0);
+    background-color: #ff4d73;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 107, 139, 0.4);
 }
 
 .register {
@@ -170,20 +163,20 @@ button:active {
 }
 
 .register a {
-    color: #e91e63;
+    color: #ff6b8b;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .register a:hover {
-    color: #ff9800;
+    color: #ff4d73;
     text-decoration: underline;
 }
 
 /* Efectos decorativos pasteleros */
 section::before {
-    content: '🍰';
+    content: '🧁';
     position: absolute;
     top: -20px;
     left: -20px;
@@ -195,7 +188,7 @@ section::before {
 }
 
 section::after {
-    content: '🎂';
+    content: '🍰';
     position: absolute;
     bottom: -20px;
     right: -20px;
