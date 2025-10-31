@@ -372,67 +372,65 @@
         <i class="fas fa-comments"></i>
     </button>
 
-    <script src="js/principal.js"></script>
-     <script src="js/chatbot.js"></script>
-     <script src="js/utils.js"></script>
-     <script src="js/orden.js"></script>
+        <script src="js/principal.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/orden.js"></script>
 
+    <!-- SDK de Firebase (versión modular) -->
+    <script type="module">
+      // Importa Firebase directamente desde el CDN
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+      import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-      
-</script>
-<!-- SDK de Firebase (versión modular) -->
-<script type="module">
-  // Importa Firebase directamente desde el CDN
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+      // Configuración de Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
+        authDomain: "cuyecitosbd-49824.firebaseapp.com",
+        projectId: "cuyecitosbd-49824",
+        storageBucket: "cuyecitosbd-49824.firebasestorage.app",
+        messagingSenderId: "612701891221",
+        appId: "1:612701891221:web:2018fc11f6bb77b96f499c"
+      };
 
-  // Configuración de Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
-    authDomain: "cuyecitosbd-49824.firebaseapp.com",
-    projectId: "cuyecitosbd-49824",
-    storageBucket: "cuyecitosbd-49824.firebasestorage.app",
-    messagingSenderId: "612701891221",
-    appId: "1:612701891221:web:2018fc11f6bb77b96f499c"
-  };
+      // Inicializar Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
 
-  // Inicializar Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+      // Escuchar el formulario
+      document.getElementById("form-orden").addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-  // Escuchar el formulario
-  document.getElementById("form-orden").addEventListener("submit", async (e) => {
-    e.preventDefault();
+        const nombre = document.getElementById("nombre").value;
+        const telefono = document.getElementById("telefono").value;
+        const email = document.getElementById("email").value;
+        const fechaEntrega = document.getElementById("fecha-entrega").value;
+        const horaEntrega = document.getElementById("hora-entrega").value;
+        const direccion = document.getElementById("direccion").value;
+        const mensaje = document.getElementById("mensaje").value;
+        const extras = Array.from(document.querySelectorAll("input[name='extras[]']:checked")).map(e => e.value);
 
-    const nombre = document.getElementById("nombre").value;
-    const telefono = document.getElementById("telefono").value;
-    const email = document.getElementById("email").value;
-    const fechaEntrega = document.getElementById("fecha-entrega").value;
-    const horaEntrega = document.getElementById("hora-entrega").value;
-    const direccion = document.getElementById("direccion").value;
-    const mensaje = document.getElementById("mensaje").value;
-    const extras = Array.from(document.querySelectorAll("input[name='extras[]']:checked")).map(e => e.value);
+        try {
+          await addDoc(collection(db, "pedidos"), {
+            nombre,
+            telefono,
+            email,
+            fechaEntrega,
+            horaEntrega,
+            direccion,
+            extras,
+            mensaje,
+            fechaRegistro: new Date().toISOString()
+          });
 
-    try {
-      await addDoc(collection(db, "pedidos"), {
-        nombre,
-        telefono,
-        email,
-        fechaEntrega,
-        horaEntrega,
-        direccion,
-        extras,
-        mensaje,
-        fechaRegistro: new Date().toISOString()
+          alert("🎉 Pedido enviado correctamente. ¡Gracias por confiar en Cuyecitos!");
+          document.getElementById("form-orden").reset();
+        } catch (error) {
+          console.error("Error al guardar pedido:", error);
+          alert("❌ Ocurrió un error al enviar tu pedido. Intenta de nuevo.");
+        }
       });
-
-      alert("🎉 Pedido enviado correctamente. ¡Gracias por confiar en Cuyecitos!");
-      document.getElementById("form-orden").reset();
-    } catch (error) {
-      console.error("Error al guardar pedido:", error);
-      alert("❌ Ocurrió un error al enviar tu pedido. Intenta de nuevo.");
-    }
-  });
-</script>
+    </script>
 </body>
 </html>
+
