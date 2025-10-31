@@ -380,24 +380,25 @@
 
       
 </script>
-<!-- SDK de Firebase -->
-<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+<!-- SDK de Firebase (versión modular) -->
+<script type="module">
+  // Importa Firebase directamente desde el CDN
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-<script>
   // Configuración de Firebase
   const firebaseConfig = {
     apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
     authDomain: "cuyecitosbd-49824.firebaseapp.com",
     projectId: "cuyecitosbd-49824",
-    storageBucket: "cuyecitosbd-49824.appspot.com",
+    storageBucket: "cuyecitosbd-49824.firebasestorage.app",
     messagingSenderId: "612701891221",
     appId: "1:612701891221:web:2018fc11f6bb77b96f499c"
   };
 
   // Inicializar Firebase
-  const app = firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
   // Escuchar el formulario
   document.getElementById("form-orden").addEventListener("submit", async (e) => {
@@ -413,7 +414,7 @@
     const extras = Array.from(document.querySelectorAll("input[name='extras[]']:checked")).map(e => e.value);
 
     try {
-      await db.collection("pedidos").add({
+      await addDoc(collection(db, "pedidos"), {
         nombre,
         telefono,
         email,
@@ -433,6 +434,5 @@
     }
   });
 </script>
-
 </body>
 </html>
