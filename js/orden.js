@@ -193,3 +193,22 @@ Te contactaremos pronto al ${ordenData.telefono} para confirmar los detalles de 
         });
     }
 }
+
+// ===== AUTOCOMPLETAR DATOS DEL USUARIO =====
+document.addEventListener("DOMContentLoaded", function() {
+  const usuarioGuardado = localStorage.getItem("usuario");
+
+  if (usuarioGuardado) {
+    const usuario = JSON.parse(usuarioGuardado);
+    const nombreInput = document.querySelector('input[name="nombre"]');
+    const emailInput = document.querySelector('input[name="email"]');
+
+    if (nombreInput && usuario.nombre) nombreInput.value = usuario.nombre;
+    if (emailInput && usuario.email) emailInput.value = usuario.email;
+  }
+});
+
+
+
+
+

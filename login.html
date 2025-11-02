@@ -39,11 +39,9 @@
 
   <!-- Firebase (SDK modular moderno) -->
   <script type="module">
-    // Importar módulos de Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-    // Configuración de tu proyecto Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
       authDomain: "cuyecitosbd-49824.firebaseapp.com",
@@ -53,7 +51,6 @@
       appId: "1:469768470210:web:d9e7f7dc6cf57365c08a6c"
     };
 
-    // Inicializar Firebase y Auth
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
@@ -68,7 +65,14 @@
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         alert(`¡Bienvenido, ${email}! 🎉`);
-        window.location.href = "index.html"; // Redirige a tu página principal
+        
+        const usuario = {
+          email: email,
+          nombre: "Usuario Cuyecitos" // Puedes cambiarlo si guardas nombre real
+        };
+        localStorage.setItem("usuario", JSON.stringify(usuario));
+
+        window.location.href = "index.html"; // Redirige al inicio
       } catch (error) {
         alert("Error al iniciar sesión: " + error.message);
       }
@@ -87,6 +91,15 @@
         alert("✅ Se envió un correo para restablecer tu contraseña. Revisa tu bandeja de entrada.");
       } catch (error) {
         alert("❌ Error: " + error.message);
+      }
+    });
+
+    // --- VERIFICAR SI YA HAY SESIÓN INICIADA ---
+    window.addEventListener("DOMContentLoaded", () => {
+      const usuarioGuardado = localStorage.getItem("usuario");
+      // Solo mostrar alerta si ya hay sesión, NO redirigir automáticamente desde login
+      if (usuarioGuardado) {
+        console.log("Usuario ya logueado:", JSON.parse(usuarioGuardado).email);
       }
     });
   </script>

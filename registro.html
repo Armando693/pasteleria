@@ -78,6 +78,11 @@
         const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
         const user = userCredential.user;
 
+          // 🟢 Actualizar el perfil con el nombre (para usarlo luego en el login)
+        await updateProfile(user, {
+          displayName: `${nombre} ${apellido}`
+        });
+
         // Guardar datos en Firestore
         await addDoc(collection(db, "usuarios"), {
           uid: user.uid,

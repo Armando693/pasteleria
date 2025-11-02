@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 </head>
 <body>
     <!-- Header -->
@@ -27,6 +26,7 @@
                 <li><a href="productos.html">Productos</a></li>
                 <li><a href="orden.html">Orden</a></li>
                 <li><a href="login.html">👨‍🍳</a></li>
+                <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
                 <li class="cart-icon">
                     <a href="#" id="cart-toggle">
                         <i class="fas fa-shopping-cart"></i>
@@ -501,5 +501,58 @@
      <script src="js/chatbot.js"></script>
      <script src="js/utils.js"></script>
      <script src="js/orden.js"></script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+  // Tu configuración (la misma de tu login)
+  const firebaseConfig = {
+    apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
+    authDomain: "cuyecitosbd-49824.firebaseapp.com",
+    projectId: "cuyecitosbd-49824",
+    storageBucket: "cuyecitosbd-49824.appspot.com",
+    messagingSenderId: "469768470210",
+    appId: "1:469768470210:web:d9e7f7dc6cf57365c08a6c"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Detectar el botón
+  const btnLogout = document.getElementById("btnLogout");
+
+  // Mostrar/ocultar el botón según la sesión
+  onAuthStateChanged(auth, (user) => {
+    btnLogout.style.display = user ? "inline-block" : "none";
+  });
+
+  // Cerrar sesión al hacer clic
+  if (btnLogout) {
+    btnLogout.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        localStorage.removeItem("usuario");
+        alert("👋 Sesión cerrada correctamente");
+        window.location.href = "index.html";
+      } catch (error) {
+        alert("❌ Error al cerrar sesión: " + error.message);
+      }
+    });
+  }
+  // --- Mostrar / ocultar botón de cerrar sesión ---
+onAuthStateChanged(auth, (user) => {
+  if (btnLogout) {
+    if (user) {
+      btnLogout.style.display = "inline-block"; // mostrar
+    } else {
+      btnLogout.style.display = "none"; // ocultar
+    }
+  }
+});
+
+</script>
+
+     
 </body>
 </html>

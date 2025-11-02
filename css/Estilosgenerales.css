@@ -54,6 +54,24 @@ img {
 .logo img {
     cursor: pointer;
 }
+.btn-logout {
+  background-color: #ff4d73;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-logout:hover {
+  background-color:#ff4d73;
+}
+#btnLogout {
+  display: none;
+}
+
+
 /* Header */
 header {
     background-color: #ffffff;
@@ -608,7 +626,7 @@ footer {
   align-items: center;
   margin-top: 10px;
   justify-content: flex-end;
-   gap: 1px; /* Espacio pequeño entre el precio y el carrito */
+   gap: 16px; /* Espacio pequeño entre el precio y el carrito */
   justify-content: center; /
 }
 
