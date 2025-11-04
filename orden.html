@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Realizar Orden - Cuyecitos Pastelería</title>
     <link rel="stylesheet" href="css/Estilosgenerales.css">
     <link rel="stylesheet" href="css/orden.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Header -->
     <header>
@@ -68,7 +71,7 @@
                 <div class="orden-resumen-alt">
                     <div class="resumen-card">
                         <h3><i class="fas fa-receipt"></i> Resumen de tu Pedido</h3>
-                        
+
                         <div class="resumen-productos" id="resumen-items">
                             <div class="empty-cart-message">
                                 <i class="fas fa-shopping-cart"></i>
@@ -76,11 +79,11 @@
                                 <a href="productos.html" class="btn btn-outline">Ver Productos</a>
                             </div>
                         </div>
-                        
+
                         <div class="resumen-extras-alt" id="resumen-extras">
                             <!-- Extras se agregarán aquí -->
                         </div>
-                        
+
                         <div class="resumen-totales-alt">
                             <div class="total-line">
                                 <span>Subtotal:</span>
@@ -143,9 +146,10 @@
                                         <i class="fas fa-user"></i>
                                         Nombre completo *
                                     </label>
-                                    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
+                                    <input type="text" id="nombre" name="nombre" required
+                                        placeholder="Tu nombre completo">
                                 </div>
-                                
+
                                 <div class="form-group-alt">
                                     <label for="telefono">
                                         <i class="fas fa-phone"></i>
@@ -153,7 +157,7 @@
                                     </label>
                                     <input type="tel" id="telefono" name="telefono" required placeholder="899 123 4567">
                                 </div>
-                                
+
                                 <div class="form-group-alt">
                                     <label for="email">
                                         <i class="fas fa-envelope"></i>
@@ -170,16 +174,17 @@
                                         <label for="fecha-entrega">Fecha de entrega *</label>
                                         <input type="date" id="fecha-entrega" name="fecha-entrega" required>
                                     </div>
-                                    
+
                                     <div class="form-group-alt">
                                         <label for="hora-entrega">Hora de entrega *</label>
                                         <input type="time" id="hora-entrega" name="hora-entrega" required>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group-alt">
                                     <label for="direccion">Dirección de entrega</label>
-                                    <textarea id="direccion" name="direccion" rows="3" placeholder="Calle, número, colonia, referencia..."></textarea>
+                                    <textarea id="direccion" name="direccion" rows="3"
+                                        placeholder="Calle, número, colonia, referencia..."></textarea>
                                 </div>
                             </div>
 
@@ -187,10 +192,11 @@
                             <div class="form-section">
                                 <h4><i class="fas fa-magic"></i> Personaliza tu Pedido</h4>
                                 <p class="section-description">Haz tu pedido único con estas opciones especiales</p>
-                                
+
                                 <div class="personalizacion-grid">
                                     <div class="personalizacion-item">
-                                        <input type="checkbox" id="extra-dedicatoria" name="extras[]" value="dedicatoria" data-precio="30">
+                                        <input type="checkbox" id="extra-dedicatoria" name="extras[]"
+                                            value="dedicatoria" data-precio="30">
                                         <label for="extra-dedicatoria">
                                             <div class="personalizacion-icon">
                                                 <i class="fas fa-pen-fancy"></i>
@@ -202,9 +208,10 @@
                                             </div>
                                         </label>
                                     </div>
-                                    
+
                                     <div class="personalizacion-item">
-                                        <input type="checkbox" id="extra-velas" name="extras[]" value="velas" data-precio="25">
+                                        <input type="checkbox" id="extra-velas" name="extras[]" value="velas"
+                                            data-precio="25">
                                         <label for="extra-velas">
                                             <div class="personalizacion-icon">
                                                 <i class="fas fa-birthday-cake"></i>
@@ -216,9 +223,10 @@
                                             </div>
                                         </label>
                                     </div>
-                                    
+
                                     <div class="personalizacion-item">
-                                        <input type="checkbox" id="extra-chispas-colores" name="extras[]" value="chispas-colores" data-precio="20">
+                                        <input type="checkbox" id="extra-chispas-colores" name="extras[]"
+                                            value="chispas-colores" data-precio="20">
                                         <label for="extra-chispas-colores">
                                             <div class="personalizacion-icon">
                                                 <i class="fas fa-palette"></i>
@@ -230,9 +238,10 @@
                                             </div>
                                         </label>
                                     </div>
-                                    
+
                                     <div class="personalizacion-item">
-                                        <input type="checkbox" id="extra-fondant" name="extras[]" value="fondant" data-precio="50">
+                                        <input type="checkbox" id="extra-fondant" name="extras[]" value="fondant"
+                                            data-precio="50">
                                         <label for="extra-fondant">
                                             <div class="personalizacion-icon">
                                                 <i class="fas fa-crown"></i>
@@ -244,9 +253,10 @@
                                             </div>
                                         </label>
                                     </div>
-                                    
+
                                     <div class="personalizacion-item">
-                                        <input type="checkbox" id="extra-nueces" name="extras[]" value="nueces" data-precio="35">
+                                        <input type="checkbox" id="extra-nueces" name="extras[]" value="nueces"
+                                            data-precio="35">
                                         <label for="extra-nueces">
                                             <div class="personalizacion-icon">
                                                 <i class="fas fa-seedling"></i>
@@ -258,9 +268,10 @@
                                             </div>
                                         </label>
                                     </div>
-                                    
+
                                     <div class="personalizacion-item">
-                                        <input type="checkbox" id="extra-frutas-frescas" name="extras[]" value="frutas-frescas" data-precio="40">
+                                        <input type="checkbox" id="extra-frutas-frescas" name="extras[]"
+                                            value="frutas-frescas" data-precio="40">
                                         <label for="extra-frutas-frescas">
                                             <div class="personalizacion-icon">
                                                 <i class="fas fa-apple-alt"></i>
@@ -273,7 +284,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="extras-total-alt">
                                     <span>Total de personalización:</span>
                                     <span id="extras-total">$0 MXN</span>
@@ -282,31 +293,35 @@
 
                             <!-- Restricciones o Alergias -->
                             <div class="form-section">
-                                <h4><i class="fas fa-exclamation-triangle"></i> Alergias o Restricciones Alimenticias</h4>
-                                <p class="section-description">Indícanos si hay algún ingrediente que deseas evitar (por ejemplo: nueces, gluten, lácteos, etc.)</p>
-                                
+                                <h4><i class="fas fa-exclamation-triangle"></i> Alergias o Restricciones Alimenticias
+                                </h4>
+                                <p class="section-description">Indícanos si hay algún ingrediente que deseas evitar (por
+                                    ejemplo: nueces, gluten, lácteos, etc.)</p>
+
                                 <div class="form-group-alt">
-                                    <textarea id="restricciones" name="restricciones" rows="4" placeholder="Ejemplo: sin nueces, sin gluten, sin azúcar... "></textarea>
-                                </div>
-                            </div>
-                                
-                                 <!-- Mensaje Especial -->
-                            <div class="form-section">
-                                <h4><i class="fas fa-comment-dots"></i> Mensaje Especial </h4>
-                                <div class="form-group-alt">
-                                    <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe aquí tu dedicatoria, instrucciones especiales, alergias, o cualquier mensaje que quieras compartir con nosotros..."></textarea>
+                                    <textarea id="restricciones" name="restricciones" rows="4"
+                                        placeholder="Ejemplo: sin nueces, sin gluten, sin azúcar... "></textarea>
                                 </div>
                             </div>
 
+                            <!-- Mensaje Especial -->
+                            <div class="form-section">
+                                <h4><i class="fas fa-comment-dots"></i> Mensaje Especial </h4>
+                                <div class="form-group-alt">
+                                    <textarea id="mensaje" name="mensaje" rows="4"
+                                        placeholder="Escribe aquí tu dedicatoria, instrucciones especiales, alergias, o cualquier mensaje que quieras compartir con nosotros..."></textarea>
+                                </div>
                             </div>
-                            <button type="submit" class="btn-enviar-alt">
-                                <i class="fas fa-paper-plane"></i>
-                                Confirmar Pedido
-                            </button>
-                        </form>
+
                     </div>
+                    <button type="submit" class="btn-enviar-alt">
+                        <i class="fas fa-paper-plane"></i>
+                        Confirmar Pedido
+                    </button>
+                    </form>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
@@ -337,9 +352,10 @@
                     <div class="redes-sociales">
                         <a href="https://www.facebook.com/?locale=es_LA"><i class="fab fa-facebook"></i></a>
                         <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/528992304688?text=Hola%20Cuyecitos%2C%20quiero%20más%20información" target="_blank">
+                        <a href="https://wa.me/528992304688?text=Hola%20Cuyecitos%2C%20quiero%20más%20información"
+                            target="_blank">
                             <i class="fab fa-whatsapp"></i>
-                            </a>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -394,108 +410,109 @@
 
     <!-- SDK de Firebase (versión modular) -->
     <script type="module">
-  // --- Importar Firebase ---
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+        // --- Importar Firebase ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-  // --- Configuración de Firebase ---
-  const firebaseConfig = {
-    apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
-    authDomain: "cuyecitosbd-49824.firebaseapp.com",
-    projectId: "cuyecitosbd-49824",
-    storageBucket: "cuyecitosbd-49824.appspot.com",
-    messagingSenderId: "612701891221",
-    appId: "1:612701891221:web:2018fc11f6bb77b96f499c"
-  };
+        // --- Configuración de Firebase ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
+            authDomain: "cuyecitosbd-49824.firebaseapp.com",
+            projectId: "cuyecitosbd-49824",
+            storageBucket: "cuyecitosbd-49824.appspot.com",
+            messagingSenderId: "612701891221",
+            appId: "1:612701891221:web:2018fc11f6bb77b96f499c"
+        };
 
-  // --- Inicializar Firebase ---
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+        // --- Inicializar Firebase ---
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-  // --- Verificar si el usuario ha iniciado sesión ---
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      alert("⚠️ Debes iniciar sesión para hacer un pedido.");
-      window.location.href = "login.html";
-    } else {
-      // Autocompletar datos del formulario
-      const nombreInput = document.getElementById("nombre");
-      const emailInput = document.getElementById("email");
+        // --- Verificar si el usuario ha iniciado sesión ---
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                alert("⚠️ Debes iniciar sesión para hacer un pedido.");
+                window.location.href = "login.html";
+            } else {
+                // Autocompletar datos del formulario
+                const nombreInput = document.getElementById("nombre");
+                const emailInput = document.getElementById("email");
 
-      const savedNombre = localStorage.getItem("nombreUsuario");
-      const savedEmail = localStorage.getItem("correoUsuario");
+                const savedNombre = localStorage.getItem("nombreUsuario");
+                const savedEmail = localStorage.getItem("correoUsuario");
 
-      if (savedNombre && nombreInput) nombreInput.value = savedNombre;
-      if (savedEmail && emailInput) emailInput.value = savedEmail;
+                if (savedNombre && nombreInput) nombreInput.value = savedNombre;
+                if (savedEmail && emailInput) emailInput.value = savedEmail;
 
-      if (!savedNombre && user.displayName && nombreInput)
-        nombreInput.value = user.displayName;
-      if (!savedEmail && user.email && emailInput)
-        emailInput.value = user.email;
-    }
-  });
+                if (!savedNombre && user.displayName && nombreInput)
+                    nombreInput.value = user.displayName;
+                if (!savedEmail && user.email && emailInput)
+                    emailInput.value = user.email;
+            }
+        });
 
-  // --- Guardar pedido ---
-  document.getElementById("form-orden").addEventListener("submit", async (e) => {
-    e.preventDefault();
+        // --- Guardar pedido ---
+        document.getElementById("form-orden").addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-    const nombre = document.getElementById("nombre").value;
-    const telefono = document.getElementById("telefono").value;
-    const email = document.getElementById("email").value;
-    const fechaEntrega = document.getElementById("fecha-entrega").value;
-    const horaEntrega = document.getElementById("hora-entrega").value;
-    const direccion = document.getElementById("direccion").value;
-    const mensaje = document.getElementById("mensaje").value;
-    const extras = Array.from(document.querySelectorAll("input[name='extras[]']:checked")).map(e => e.value);
+            const nombre = document.getElementById("nombre").value;
+            const telefono = document.getElementById("telefono").value;
+            const email = document.getElementById("email").value;
+            const fechaEntrega = document.getElementById("fecha-entrega").value;
+            const horaEntrega = document.getElementById("hora-entrega").value;
+            const direccion = document.getElementById("direccion").value;
+            const mensaje = document.getElementById("mensaje").value;
+            const extras = Array.from(document.querySelectorAll("input[name='extras[]']:checked")).map(e => e.value);
 
-    try {
-      await addDoc(collection(db, "pedidos"), {
-        nombre,
-        telefono,
-        email,
-        fechaEntrega,
-        horaEntrega,
-        direccion,
-        extras,
-        mensaje,
-        fechaRegistro: new Date().toISOString()
-      });
+            try {
+                await addDoc(collection(db, "pedidos"), {
+                    nombre,
+                    telefono,
+                    email,
+                    fechaEntrega,
+                    horaEntrega,
+                    direccion,
+                    extras,
+                    mensaje,
+                    fechaRegistro: new Date().toISOString()
+                });
 
-      alert("🎉 Pedido enviado correctamente. ¡Gracias por confiar en Cuyecitos!");
-      document.getElementById("form-orden").reset();
-    } catch (error) {
-      console.error("Error al guardar pedido:", error);
-      alert("❌ Ocurrió un error al enviar tu pedido. Intenta de nuevo.");
-    }
-  });
+                alert("🎉 Pedido enviado correctamente. ¡Gracias por confiar en Cuyecitos!");
+                document.getElementById("form-orden").reset();
+            } catch (error) {
+                console.error("Error al guardar pedido:", error);
+                alert("❌ Ocurrió un error al enviar tu pedido. Intenta de nuevo.");
+            }
+        });
 
-  // --- Cerrar sesión ---
-  const btnLogout = document.getElementById("btnLogout"); // asegúrate de tener este botón en el HTML
-  if (btnLogout) {
-    btnLogout.addEventListener("click", async () => {
-      try {
-        await signOut(auth);
-        localStorage.clear();
-        alert("👋 Sesión cerrada correctamente");
-        window.location.href = "index.html";
-      } catch (error) {
-        alert("❌ Error al cerrar sesión: " + error.message);
-      }
-    });
-  }
-  // --- Mostrar / ocultar botón de cerrar sesión ---
-onAuthStateChanged(auth, (user) => {
-  if (btnLogout) {
-    if (user) {
-      btnLogout.style.display = "inline-block"; // mostrar
-    } else {
-      btnLogout.style.display = "none"; // ocultar
-    }
-  }
-})
-</script>
+        // --- Cerrar sesión ---
+        const btnLogout = document.getElementById("btnLogout"); // asegúrate de tener este botón en el HTML
+        if (btnLogout) {
+            btnLogout.addEventListener("click", async () => {
+                try {
+                    await signOut(auth);
+                    localStorage.clear();
+                    alert("👋 Sesión cerrada correctamente");
+                    window.location.href = "index.html";
+                } catch (error) {
+                    alert("❌ Error al cerrar sesión: " + error.message);
+                }
+            });
+        }
+        // --- Mostrar / ocultar botón de cerrar sesión ---
+        onAuthStateChanged(auth, (user) => {
+            if (btnLogout) {
+                if (user) {
+                    btnLogout.style.display = "inline-block"; // mostrar
+                } else {
+                    btnLogout.style.display = "none"; // ocultar
+                }
+            }
+        })
+    </script>
 
 </body>
+
 </html>
