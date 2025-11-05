@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto - Admin</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 2rem;
+            background: #f8f8f8;
+        }
+
+        form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 400px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            margin: auto;
+        }
+
+        input,
+        textarea,
+        select,
+        button {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background: #2ecc71;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #27ae60;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>🧁 Agregar nuevo producto</h2>
+
+    <form id="formProducto">
+        <input type="text" id="nombre" placeholder="Nombre del producto" required>
+        <textarea id="descripcion" placeholder="Descripción" required></textarea>
+        <input type="text" id="ingredientes" placeholder="Ingredientes" required>
+        <input type="number" id="precio" placeholder="Precio (MXN)" required>
+        <input type="text" id="categoria" placeholder="Categoría" required>
+        <input type="number" id="stock" placeholder="Stock disponible" required>
+        <input type="file" id="imagen" accept="image/*" required>
+        <button type="submit">Agregar producto</button>
+    </form>
+
+    <p id="mensaje"></p>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+        // 🚀 Configuración Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
+            authDomain: "cuyecitosbd-49824.firebaseapp.com",
+            projectId: "cuyecitosbd-49824",
+            storageBucket: "cuyecitosbd-49824.appspot.com",
+            messagingSenderId: "469768470210",
+            appId: "1:469768470210:web:d9e7f7dc6cf57365c08a6c"
+        };
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 📦 Referencias del formulario
+        const form = document.getElementById('formProducto');
+        const mensaje = document.getElementById('mensaje');
+
+        // 🖼️ API key de ImgBB (créala en: https://api.imgbb.com/)
+        const imgbbApiKey = "faadbdbfacb849e4be0527476a4fd64e"; // 🔹 Reemplaza esto con tu propia API Key de ImgBB
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Datos del formulario
+            const nombre = document.getElementById('nombre').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const ingredientes = document.getElementById('ingredientes').value;
+            const precio = parseFloat(document.getElementById('precio').value);
+            const categoria = document.getElementById('categoria').value;
+            const stock = parseInt(document.getElementById('stock').value);
+            const archivo = document.getElementById('imagen').files[0];
+
+            if (!archivo) {
+                alert("Por favor selecciona una imagen 📷");
+                return;
+            }
+
+            mensaje.textContent = "⏳ Subiendo imagen y guardando producto...";
+
+            try {
+                // 1️⃣ Convertir imagen a Base64
+                const base64 = await convertirABase64(archivo);
+
+                // 2️⃣ Subir a ImgBB
+                const formData = new FormData();
+                formData.append("image", base64.split(",")[1]); // quitar el encabezado base64
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await res.json();
+                if (!data.success) throw new Error("Error al subir imagen a ImgBB");
+
+                const urlImagen = data.data.url; // ✅ URL de la imagen en ImgBB
+
+                // 3️⃣ Guardar producto en Firestore
+                await addDoc(collection(db, "productos"), {
+                    nombre,
+                    descripcion,
+                    ingredientes,
+                    precio,
+                    categoria,
+                    stock,
+                    imagen: urlImagen,
+                    activo: true
+                });
+
+                mensaje.textContent = "✅ Producto agregado correctamente";
+                form.reset();
+
+            } catch (error) {
+                console.error("Error al agregar producto:", error);
+                mensaje.textContent = "❌ Ocurrió un error al agregar el producto";
+            }
+        });
+
+        // 🔧 Función auxiliar para convertir imagen a Base64
+        function convertirABase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
+
+</body>
+
+</html>
