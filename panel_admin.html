@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Administración - Pastelería</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .producto {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            margin: 12px auto;
+            max-width: 800px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .producto img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .info {
+            flex: 1;
+        }
+
+        #productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 30px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 6px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 6px;
+            margin-top: 4px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            background: #ff7b00;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        button:hover {
+            background: #e76a00;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Panel de Administración - Pastelería 🍰</h1>
+    <div id="productos"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+        // 🔥 Configuración Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
+            authDomain: "cuyecitosbd-49824.firebaseapp.com",
+            projectId: "cuyecitosbd-49824",
+            storageBucket: "cuyecitosbd-49824.appspot.com",
+            messagingSenderId: "469768470210",
+            appId: "1:469768470210:web:d9e7f7dc6cf57365c08a6c"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const contenedor = document.getElementById("productos");
+
+        async function cargarProductos() {
+            const querySnapshot = await getDocs(collection(db, "productos"));
+            contenedor.innerHTML = "";
+
+            querySnapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                const card = document.createElement("div");
+                card.classList.add("producto");
+
+                card.innerHTML = `
+                                <div class="info">
+                                    <img src="${data.imagen}" alt="${data.nombre}">
+                                    <label>Nombre:</label>
+                                    <input type="text" id="nombre-${docSnap.id}" value="${data.nombre}">
+
+                                    <label>Descripción:</label>
+                                    <textarea id="descripcion-${docSnap.id}">${data.descripcion}</textarea>
+
+                                    <label>Ingredientes:</label>
+                                    <textarea id="ingredientes-${docSnap.id}">${data.ingredientes}</textarea>
+
+                                    <label>Precio:</label>
+                                    <input type="number" id="precio-${docSnap.id}" value="${data.precio}">
+
+                                    <label>Categoría:</label>
+                                    <input type="text" id="categoria-${docSnap.id}" value="${data.categoria}">
+
+                                    <label>Imagen (URL):</label>
+                                    <input type="text" id="imagen-${docSnap.id}" value="${data.imagen}">
+
+                                    <button onclick="guardarCambios('${docSnap.id}')">💾 Guardar Cambios</button>
+                                </div>
+                            `;
+                contenedor.appendChild(card);
+            });
+        }
+
+        window.guardarCambios = async function (id) {
+            const nombre = document.getElementById(`nombre-${id}`).value;
+            const descripcion = document.getElementById(`descripcion-${id}`).value;
+            const ingredientes = document.getElementById(`ingredientes-${id}`).value;
+            const precio = Number(document.getElementById(`precio-${id}`).value);
+            const categoria = document.getElementById(`categoria-${id}`).value;
+            const imagen = document.getElementById(`imagen-${id}`).value;
+
+            const docRef = doc(db, "productos", id);
+            await updateDoc(docRef, {
+                nombre,
+                descripcion,
+                ingredientes,
+                precio,
+                categoria,
+                imagen
+            });
+
+            alert("✅ Cambios guardados correctamente.");
+        };
+
+        cargarProductos();
+    </script>
+</body>
+
+</html>
