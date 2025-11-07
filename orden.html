@@ -188,8 +188,8 @@
                                     <textarea id="direccion" name="direccion" rows="3"
                                         placeholder="Calle, número, colonia, referencia..."></textarea>
                                 </div>
-                            </div>
-
+                                    
+                            
                             <!-- Personalización -->
                             <div class="form-section">
                                 <h4><i class="fas fa-magic"></i> Personaliza tu Pedido</h4>
@@ -312,6 +312,45 @@
                                     <textarea id="mensaje" name="mensaje" rows="4"
                                         placeholder="Escribe aquí tu dedicatoria, instrucciones especiales, alergias, o cualquier mensaje que quieras compartir con nosotros..."></textarea>
                                 </div>
+                            </div>
+
+                            <!-- Método de Pago -->
+                            <div class="form-section">
+                            <h4><i class="fas fa-credit-card"></i> Método de Pago</h4>
+                            <div class="form-group-alt">
+                                <label for="metodo-pago">Selecciona tu método de pago *</label>
+                                <select id="metodo-pago" name="metodo-pago" required>
+                                <option value="" disabled selected>-- Selecciona una opción --</option>
+                                <option value="tarjeta">Tarjeta</option>
+                                <option value="transferencia">Transferencia Bancaria</option>
+                                <option value="efectivo">Efectivo</option>
+                                </select>
+                            </div>
+
+                            <!-- Opciones para pago con tarjeta -->
+                            <div class="form-group-alt" id="opciones-tarjeta" style="display: none;">
+                                <label for="tipo-tarjeta">Tipo de Tarjeta *</label>
+                                <select id="tipo-tarjeta" name="tipo-tarjeta">
+                                <option value="" disabled selected>-- Selecciona tipo de tarjeta --</option>
+                                <option value="visa">Visa</option>
+                                <option value="mastercard">MasterCard</option>
+                                <option value="american-express">American Express</option>
+                                <option value="carnet">Carnet</option>
+                                <option value="paypal">PayPal</option>
+                                </select>
+                            </div>
+
+                            <!-- Información para transferencia -->
+                            <div class="form-group-alt" id="info-transferencia" style="display: none;">
+                                <label>Datos para Transferencia Bancaria</label>
+                                <p style="margin-top: 6px; line-height: 1.5;">
+                                <strong>Banco:</strong> BBVA México<br>
+                                <strong>Número de Cuenta:</strong> 012345678901234567<br>
+                                <strong>CLABE:</strong> 012345678901234567<br>
+                                <strong>Titular:</strong> Cuyecitos Pastelería<br>
+                                Por favor envía tu comprobante a <strong>hola@cuyecitos.com</strong>
+                                </p>
+                            </div>
                             </div>
                     <button type="submit" class="btn-enviar-alt">
                         <i class="fas fa-paper-plane"></i>

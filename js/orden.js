@@ -154,6 +154,7 @@ function setupOrderForm() {
                 fechaEntrega: formData.get('fecha-entrega'),
                 horaEntrega: formData.get('hora-entrega'),
                 direccion: formData.get('direccion'),
+                metodoPago: formData.get('metodo-pago'),
                 mensaje: formData.get('mensaje'),
                 productos: cart,
                 extras: extrasSeleccionados,
@@ -171,7 +172,7 @@ Resumen del pedido:
 - Subtotal: $${ordenData.subtotal} MXN
 - Extras: $${ordenData.totalExtras} MXN
 - Total: $${ordenData.total} MXN
-
+- Método de Pago: ${ordenData.metodoPago}
 Te contactaremos pronto al ${ordenData.telefono} para confirmar los detalles de entrega.
             `;
 
@@ -193,6 +194,27 @@ Te contactaremos pronto al ${ordenData.telefono} para confirmar los detalles de 
         });
     }
 }
+
+// ===== MÉTODO DE PAGO =====
+document.addEventListener("DOMContentLoaded", () => {
+    const metodoPago = document.getElementById("metodo-pago");
+    const opcionesTarjeta = document.getElementById("opciones-tarjeta");
+    const infoTransferencia = document.getElementById("info-transferencia");
+
+    if (metodoPago) {
+        metodoPago.addEventListener("change", () => {
+            opcionesTarjeta.style.display = "none";
+            infoTransferencia.style.display = "none";
+
+            if (metodoPago.value === "tarjeta") {
+                opcionesTarjeta.style.display = "block";
+            } else if (metodoPago.value === "transferencia") {
+                infoTransferencia.style.display = "block";
+            }
+        });
+    }
+});
+
 
 
 // ===== AUTOCOMPLETAR DATOS DEL USUARIO =====
