@@ -188,7 +188,7 @@
 }
 
 .form-card {
-    padding: 40px;
+    padding: 20px;
 }
 
 .form-card h3 {
@@ -257,12 +257,14 @@
     justify-content: center;
     gap: 10px;
     margin-top: 30px;
+     margin-bottom: 30px;
 }
 
 .btn-enviar-alt:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(255, 107, 139, 0.3);
 }
+
 /* Estilos para el nuevo diseño de resumen */
 .resumen-item-alt {
     padding: 15px 0;

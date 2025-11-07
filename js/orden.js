@@ -194,6 +194,7 @@ Te contactaremos pronto al ${ordenData.telefono} para confirmar los detalles de 
     }
 }
 
+
 // ===== AUTOCOMPLETAR DATOS DEL USUARIO =====
 document.addEventListener("DOMContentLoaded", function() {
   const usuarioGuardado = localStorage.getItem("usuario");
@@ -207,6 +208,8 @@ document.addEventListener("DOMContentLoaded", function() {
     if (emailInput && usuario.email) emailInput.value = usuario.email;
   }
 });
+
+
 
 
 
