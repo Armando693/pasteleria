@@ -70,765 +70,11 @@
                 <button class="filtro-btn" data-categoria="roscas">Roscas</button>
                 <button class="filtro-btn" data-categoria="cupcakes">Cupcakes</button>
                 <button class="filtro-btn" data-categoria="otros">Otros</button>
+                <button class="filtro-btn" id="btnAgregarProducto" style="display: none;">➕Añadir Producto</button>
+                <button class="filtro-btn" id="btnEditarProducto" style="display: none;">🖋️Editar Producto</button>
             </div>
-            <div class="productos-grid">
-                <!-- Pasteles -->
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/tarta-de-chocolate-y-fresas-naturales copy.jpg" alt="Pastel de Chocolate">
-                    <h3>Pastel de Chocolate</h3>
-                    <p class="descripcion">Delicioso pastel de chocolate con relleno de crema y cubierto con ganache.
-                    </p>
-                    <p class="ingredientes">Ingredientes: Harina, huevo, chocolate, mantequilla, azúcar, crema.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$580 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de Chocolate" data-precio="580">
-                            <i class="fas fa-shopping-cart"></i>
-                        </button>
-                    </div>
-
-                </div>
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/pastel-vainilla.png" alt="Pastel de Vainilla">
-                    <h3>Pastel de Vainilla</h3>
-                    <p class="descripcion">Esponjoso pastel de vainilla con relleno de crema chantilly y fresas.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevo, vainilla, mantequilla, azúcar, fresas, crema.
-                    </p>
-                    <div class="precio-carrito">
-                        <p class="precio">$420 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de Vainilla" data-precio="420"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/pastel-fresa.jpg" alt="Pastel de Fresa">
-                    <h3>Pastel de Fresa</h3>
-                    <p class="descripcion">Pastel de vainilla con relleno de fresas naturales y crema batida.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevo, vainilla, fresas, azúcar, crema.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$450 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de Fresa" data-precio="450"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/pastel3-leches.png" alt="Pastel 3 Leches">
-                    <h3>Pastel 3 Leches</h3>
-                    <p class="descripcion">Clásico pastel empapado en una mezcla de tres leches y cubierto con merengue.
-                    </p>
-                    <p class="ingredientes">Ingredientes: Harina, huevo, leche evaporada, leche condensada, crema,
-                        azúcar.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$300 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel 3 Leches" data-precio="300"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/36-rompope-almendra-nuez.jpg" alt="Pastel de rompope">
-                    <h3>Pastel de rompope</h3>
-                    <p class="descripcion">Bizcocho esponjoso bañado con rompope artesanal, sabor dulce y ligeramente
-                        especiado.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevos, azúcar, mantequilla, polvo para hornear,
-                        rompope, almendras o nuez.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$400 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de rompope" data-precio="400"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/ferrero.jpg" alt="Pastel de ferrero">
-                    <h3>Pastel de ferrero</h3>
-                    <p class="descripcion">Intenso y sofisticado: bizcocho de chocolate relleno con crema de avellanas y
-                        crujientes trozos de Ferrero Rocher.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevos, azúcar, mantequilla, cacao en polvo, polvo
-                        para hornear, crema de avellanas, galleta triturada, avellanas.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$590 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de ferrero" data-precio="590"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/pastel redvelvet.jpg" alt="Pastel redvelvet">
-                    <h3>Pastel redvelvet</h3>
-                    <p class="descripcion">Suave pastel rojo con cream cheese frosting y decoración elegante.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevos, azúcar, mantequilla, cacao en polvo, polvo
-                        para hornear, betún de azúcar glass.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$290 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel red velvet" data-precio="290"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/pastel-coco.jpg" alt="Pastel de coco">
-                    <h3>Pastel de coco</h3>
-                    <p class="descripcion">Suave y tropical, con coco rallado y leche de coco, relleno de crema ligera y
-                        cubierto de betún esponjoso.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevos, azúcar, mantequilla, leche de coco, coco
-                        rallado, polvo para hornear, crema ligera, betún.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$490 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de coco" data-precio="490"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/pastel-de-piña.jpeg" alt="Pastel de piña">
-                    <h3>Pastel de piña</h3>
-                    <p class="descripcion">Refrescante y ligero, con crema suave y trozos de piña fresca, sabor tropical
-                        y natural.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevos, azúcar, mantequilla, polvo para hornear, crema
-                        ligera, piña fresca.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$490 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de piña" data-precio="490"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/pastel-de-platano.jpg" alt="Pastel de platano">
-                    <h3>Pastel de platano</h3>
-                    <p class="descripcion">Dulce y aromático, elaborado con plátano maduro para un bizcocho suave y
-                        naturalmente delicioso.</p>
-                    <p class="ingredientes">Ingredientes: Harina, plátano maduro, huevos, azúcar, mantequilla o aceite,
-                        polvo para hornear, canela.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$290 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de platano" data-precio="290"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/pastel-limon.jpg" alt="Pastel de limon">
-                    <h3>Pastel de limon</h3>
-                    <p class="descripcion">Ligero y refrescante, con un relleno ácido equilibrado con merengue dorado.
-                        Explosión cítrica irresistible.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevos, azúcar, mantequilla, jugo de limón, ralladura
-                        de limón, polvo para hornear, merengue.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$190 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de limon" data-precio="190"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/pastel-piña-colada.jpg" alt="Pastel de piña colada">
-                    <h3>Pastel de piña colada</h3>
-                    <p class="descripcion">Tropical, combina la frescura de la piña y la suavidad del coco, evocando un
-                        cóctel veraniego.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevos, azúcar, mantequilla, polvo para hornear, piña
-                        triturada, coco rallado, crema ligera.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$600 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de piña colada" data-precio="600"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="pasteles">
-                    <img src="postres/pastel-zanaoria.jpg" alt="Pastel de zanaoria">
-                    <h3>Pastel de zanaoria</h3>
-                    <p class="descripcion">Húmedo y casero, con zanahoria rallada, nueces y especias que llenan de
-                        calidez cada rebanada.</p>
-                    <p class="ingredientes">Ingredientes: Harina, zanahoria rallada, huevos, azúcar morena, aceite,
-                        polvo para hornear, canela, nuez moscada, nueces.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$200 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de zanaoria" data-precio="200"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <!-- Galletas -->
-                <div class="producto-item" data-categoria="galletas">
-                    <img src="postres/galletas-decoradas.jpg" alt="Galletas Decoradas">
-                    <h3>Galletas Decoradas</h3>
-                    <p class="descripcion">Galletas de mantequilla decoradas a mano con glaseado real.</p>
-                    <p class="ingredientes">Ingredientes: Harina, mantequilla, azúcar, huevo, esencia de vainilla.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$190 MXN (5 pzas)</p>
-                        <button class="btn-agregar" data-producto="Galletas Decoradas" data-precio="190"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="galletas">
-                    <img src="postres/galletaschispas.jpeg" alt="Galletas con Chispas">
-                    <h3>Galletas con Chispas</h3>
-                    <p class="descripcion">Galletas crujientes repletas de chispas de chocolate.</p>
-                    <p class="ingredientes">Ingredientes: Harina, mantequilla, azúcar, huevo, chispas de chocolate.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$100 MXN (8 pzas)</p>
-                        <button class="btn-agregar" data-producto="Galletas con Chispas" data-precio="100"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="galletas">
-                    <img src="postres/galletasavena.jpeg" alt="Galletas de Avena">
-                    <h3>Galletas de Avena</h3>
-                    <p class="descripcion">Suaves y nutritivas, con avena y un toque de miel.</p>
-                    <p class="ingredientes">Ingredientes: Harina integral, avena, miel, mantequilla, huevo, azúcar
-                        morena.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$120 MXN (8 pzas)</p>
-                        <button class="btn-agregar" data-producto="Galletas de Avena" data-precio="120"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="galletas">
-                    <img src="postres/galletas-de-mantequilla-con-nueces.jpg" alt="Galletas de Nuez">
-                    <h3>Galletas de Nuez</h3>
-                    <p class="descripcion">Delicadas y crujientes, con trozos de nuez caramelizada.</p>
-                    <p class="ingredientes">Ingredientes: Harina, mantequilla, azúcar glass, nueces, huevo.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$140 MXN (8 pzas)</p>
-                        <button class="btn-agregar" data-producto="Galletas de Nuez" data-precio="140"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="galletas">
-                    <img src="postres/galletalimon.jpeg" alt="Galletas de Limón">
-                    <h3>Galletas de Limón</h3>
-                    <p class="descripcion">Frescas y suaves, con ralladura de limón y un glaseado ligero.</p>
-                    <p class="ingredientes">Ingredientes: Harina, mantequilla, azúcar, huevo, ralladura y jugo de limón.
-                    </p>
-                    <div class="precio-carrito">
-                        <p class="precio">$110 MXN (8 pzas)</p>
-                        <button class="btn-agregar" data-producto="Galletas de Limón" data-precio="110"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="galletas">
-                    <img src="postres/Galletas-cacahuete.jpg" alt="Galletas de Cacahuate">
-                    <h3>Galletas de Cacahuate</h3>
-                    <p class="descripcion">Clásicas galletas con el sabor inconfundible de la crema de cacahuate.</p>
-                    <p class="ingredientes">Ingredientes: Harina, mantequilla, azúcar, huevo, crema de cacahuate.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$130 MXN (8 pzas)</p>
-                        <button class="btn-agregar" data-producto="Galletas de Cacahuate" data-precio="130"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="galletas">
-                    <img src="postres/GALLETAS-RED-VELVET.jpg" alt="Galletas Red Velvet">
-                    <h3>Galletas Red Velvet</h3>
-                    <p class="descripcion">Galletas suaves con el clásico color rojo y relleno cremoso de queso.</p>
-                    <p class="ingredientes">Ingredientes: Harina, cacao, mantequilla, azúcar, huevo, colorante rojo,
-                        queso crema.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$150 MXN (5 pzas)</p>
-                        <button class="btn-agregar" data-producto="Galletas Red Velvet" data-precio="150"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="galletas">
-                    <img src="postres/galletas-tradicionales-de-navidad-2015.jpeg" alt="Galletas Navideñas">
-                    <h3>Galletas Navideñas</h3>
-                    <p class="descripcion">Aromáticas y festivas, con canela, jengibre y glaseado decorativo.</p>
-                    <p class="ingredientes">Ingredientes: Harina, mantequilla, azúcar, huevo, canela, jengibre, clavo.
-                    </p>
-                    <div class="precio-carrito">
-                        <p class="precio">$160 MXN (5 pzas)</p>
-                        <button class="btn-agregar" data-producto="Galletas Navideñas" data-precio="160"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="galletas">
-                    <img src="postres/galletamacadamia.png" alt="Galletas con Macadamia">
-                    <h3>Galletas con Macadamia</h3>
-                    <p class="descripcion">Crujientes por fuera y suaves por dentro, con trozos de nuez de macadamia que
-                        les dan un sabor único.</p>
-                    <p class="ingredientes">Ingredientes: Harina, mantequilla, azúcar, huevo, nuez de macadamia,
-                        vainilla.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$170 MXN (5 pzas)</p>
-                        <button class="btn-agregar" data-producto="Galletas con Macadamia" data-precio="170"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="galletas">
-                    <img src="postres/Galletas-Brownie.jpg" alt="Galletas Brownie">
-                    <h3>Galletas Brownie</h3>
-                    <p class="descripcion">Intensas y chocolatosas, con textura suave tipo brownie y un centro
-                        ligeramente húmedo.</p>
-                    <p class="ingredientes">Ingredientes: Harina, mantequilla, azúcar, huevo, cacao en polvo, chocolate
-                        derretido.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$180 MXN (8 pzas)</p>
-                        <button class="btn-agregar" data-producto="Galletas Brownie" data-precio="180"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="galletas">
-                    <img src="postres/Cookies-de-Matcha-11.jpg" alt="Galletas de Matcha">
-                    <h3>Galletas de Matcha</h3>
-                    <p class="descripcion">Crujientes y sofisticadas, con el sabor único del té verde matcha japonés,
-                        ideales para acompañar con café o té.</p>
-                    <p class="ingredientes">Ingredientes: Harina, mantequilla, azúcar, huevo, polvo de matcha, vainilla.
-                    </p>
-                    <div class="precio-carrito">
-                        <p class="precio">$180 MXN (8 pzas)</p>
-                        <button class="btn-agregar" data-producto="Galletas de Matcha" data-precio="180"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-
-
-                <!-- Roscas -->
-                <div class="producto-item" data-categoria="roscas">
-                    <img src="postres/rosca_de_reyes_secundaria.jpeg" alt="Rosca de Reyes">
-                    <h3>Rosca de Reyes</h3>
-                    <p class="descripcion">Tradicional rosca de reyes decorada con fruta cristalizada y azúcar.</p>
-                    <p class="ingredientes">Ingredientes: Harina, levadura, mantequilla, huevo, fruta cristalizada,
-                        azúcar.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$450 MXN</p>
-                        <button class="btn-agregar" data-producto="Rosca de Reyes" data-precio="450"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="roscas">
-                    <img src="postres/rosca-zanahoria-queso-1.jpg" alt="Rosca de zanahoria">
-                    <h3>Rosca de Zanahoria</h3>
-                    <p class="descripcion">Esponjosa y casera, con zanahoria rallada, especias y el toque perfecto de
-                        betún de queso crema.</p>
-                    <p class="ingredientes">Ingredientes: harina, zanahoria rallada, huevos, azúcar morena, aceite,
-                        canela, polvo para hornear, queso crema.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$250 MXN</p>
-                        <button class="btn-agregar" data-producto="Rosca de Zanahoria" data-precio="250"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="roscas">
-                    <img src="postres/roscamaracuya.jpg" alt="Rosca de Maracuyá">
-                    <h3>Rosca de Maracuyá</h3>
-                    <p class="descripcion">Refrescante y tropical, con el toque ácido y aromático del maracuyá que
-                        sorprende al paladar.</p>
-                    <p class="ingredientes">Ingredientes: harina, pulpa de maracuyá, huevos, azúcar, aceite vegetal.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$320 MXN</p>
-                        <button class="btn-agregar" data-producto="Rosca de Maracuyá" data-precio="320"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="roscas">
-                    <img src="postres/roscapistache.jpg" alt="Rosca de Pistache">
-                    <h3>Rosca de Pistache</h3>
-                    <p class="descripcion">Exquisita y cremosa, elaborada con pistaches tostados que aportan un sabor y
-                        color únicos.</p>
-                    <p class="ingredientes">Ingredientes: harina, pistaches molidos, huevos, azúcar, mantequilla,
-                        vainilla.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$350 MXN</p>
-                        <button class="btn-agregar" data-producto="Rosca de Pistache" data-precio="350"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="roscas">
-                    <img src="postres/roscadevainilla.jpg" alt="Rosca de Vainilla">
-                    <h3>Rosca de Vainilla</h3>
-                    <p class="descripcion">Un clásico de la repostería, con aroma a vainilla natural y textura suave que
-                        conquista a todos.</p>
-                    <p class="ingredientes">Ingredientes: harina, huevos, leche, mantequilla, azúcar, esencia de
-                        vainilla.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$230 MXN</p>
-                        <button class="btn-agregar" data-producto="Rosca de Vainilla" data-precio="230"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="roscas">
-                    <img src="postres/roscadecafe.jpeg" alt="Rosca de Café">
-                    <h3>Rosca de Café</h3>
-                    <p class="descripcion">Perfecta para acompañar una taza, con el sabor intenso del café que realza su
-                        suavidad.</p>
-                    <p class="ingredientes">Ingredientes: harina, café soluble, huevos, azúcar, mantequilla, leche.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$250 MXN</p>
-                        <button class="btn-agregar" data-producto="Rosca de Café" data-precio="250"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="roscas">
-                    <img src="postres/roscadenaranja.jpg" alt="Rosca de Naranja">
-                    <h3>Rosca de Naranja</h3>
-                    <p class="descripcion">Delicada y aromática, con jugo natural y ralladura de naranja que aportan
-                        frescura y un sabor cítrico inigualable.</p>
-                    <p class="ingredientes">Ingredientes: harina, jugo de naranja, ralladura de naranja, huevos, azúcar,
-                        mantequilla.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$240 MXN</p>
-                        <button class="btn-agregar" data-producto="Rosca de Naranja" data-precio="240"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="roscas">
-                    <img src="postres/roscademangococo.jpg" alt="Rosca de Coco con Mango">
-                    <h3>Rosca de Coco con Mango</h3>
-                    <p class="descripcion">Una combinación tropical explosiva: la suavidad del coco con el dulzor jugoso
-                        del mango.</p>
-                    <p class="ingredientes">Ingredientes: harina, coco rallado, pulpa de mango, huevos, leche de coco.
-                    </p>
-                    <div class="precio-carrito">
-                        <p class="precio">$330 MXN</p>
-                        <button class="btn-agregar" data-producto="Rosca de Coco con Mango" data-precio="330"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="roscas">
-                    <img src="postres/roscadematcha.jpg" alt="Rosca de Matcha">
-                    <h3>Rosca de Matcha</h3>
-                    <p class="descripcion">Delicada y elegante, con el sabor único del té verde japonés matcha, perfecta
-                        para quienes buscan un postre sofisticado.</p>
-                    <p class="ingredientes">Ingredientes: harina, polvo de matcha, huevos, azúcar, leche, mantequilla.
-                    </p>
-                    <div class="precio-carrito">
-                        <p class="precio">$300 MXN</p>
-                        <button class="btn-agregar" data-producto="Rosca de Matcha" data-precio="300"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <!-- Cupcakes -->
-                <div class="producto-item" data-categoria="cupcakes">
-                    <img src="postres/cupkakesvariados.jpg" alt="Cupcakes Variados">
-                    <h3>Cupcakes Variados</h3>
-                    <p class="descripcion">Deliciosos cupcakes decorados con buttercream y toppings variados.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevo, mantequilla, azúcar, leche, colorantes.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$180 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Cupcakes Variados" data-precio="180"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="cupcakes">
-                    <img src="postres/cupkakeschocolatee.jpg" alt="Cupcakes de Chocolate">
-                    <h3>Cupcakes de Chocolate</h3>
-                    <p class="descripcion">Cupcakes de chocolate con frosting de chocolate y decoración.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevo, mantequilla, azúcar, cacao, chocolate.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$200 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Cupcakes de Chocolate" data-precio="200"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="cupcakes">
-                    <img src="postres/Cupcake-con-Frosting-de-Menta.jpg" alt="Cupcakes Chocolate y Menta">
-                    <h3>Cupcakes Chocolate y Menta</h3>
-                    <p class="descripcion">La combinación perfecta del intenso chocolate con el frescor de la menta. ¡Un
-                        clásico de Navidad!</p>
-                    <p class="ingredientes">Ingredientes: harina, cacao, huevo, mantequilla, azúcar, extracto de menta,
-                        chocolate derretido.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$240 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Cupcakes Chocolate y Menta" data-precio="240"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="cupcakes">
-                    <img src="postres/cupcakenuez.jpg" alt="Cupcakes de Nuez">
-                    <h3>Cupcakes de Nuez</h3>
-                    <p class="descripcion">Suaves y llenos de sabor, con trocitos de nuez tostada y un toque de vainilla
-                        para realzar su dulzura.</p>
-                    <p class="ingredientes">Ingredientes: harina, mantequilla, azúcar, huevo, nuez picada, vainilla.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$220 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Cupcakes de Nuez" data-precio="220"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="cupcakes">
-                    <img src="postres/muffins-de-arandanos-y-naranja.jpg" alt="Cupcakes de Arándano y Naranja">
-                    <h3>Cupcakes de Arándano y Naranja</h3>
-                    <p class="descripcion">Una mezcla cítrica y frutal con jugo de naranja natural y arándanos
-                        deshidratados, perfectos para las fiestas.</p>
-                    <p class="ingredientes">Ingredientes: harina, mantequilla, azúcar, huevo, jugo de naranja,
-                        ralladura, arándanos secos.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$230 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Cupcakes de Arándano y Naranja" data-precio="230"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="cupcakes">
-                    <img src="postres/CUPCAKES-RED-VELVET2.jpg" alt="Cupcakes Red Velvet">
-                    <h3>Cupcakes Red Velvet</h3>
-                    <p class="descripcion">De color intenso y textura aterciopelada, coronados con betún de queso crema.
-                    </p>
-                    <p class="ingredientes">Ingredientes: harina, cacao, mantequilla, huevo, azúcar, colorante rojo,
-                        queso crema.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$210 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Cupcakes Red Velvet" data-precio="210"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="cupcakes">
-                    <img src="postres/cupckakecoco.jpg" alt="Cupcakes de Coco">
-                    <h3>Cupcakes de Coco</h3>
-                    <p class="descripcion">Dulces y tropicales, con masa suave y cobertura cremosa de coco rallado.</p>
-                    <p class="ingredientes">Ingredientes: harina, mantequilla, huevo, azúcar, leche de coco, coco
-                        rallado.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$210 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Cupcakes de Coco" data-precio="210"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="cupcakes">
-                    <img src="postres/mufinoreo.jpeg" alt="Cupcakes Oreo">
-                    <h3>Cupcakes Oreo</h3>
-                    <p class="descripcion">Con base de chocolate, relleno cremoso y trozos de galleta Oreo en cada
-                        bocado.</p>
-                    <p class="ingredientes">Ingredientes: harina, mantequilla, azúcar, huevo, cacao, galletas Oreo
-                        trituradas.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$230 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Cupcakes Oreo" data-precio="230"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="cupcakes">
-                    <img src="postres/cupkakespistacho.jpg" alt="Cupcakes de Pistache">
-                    <h3>Cupcakes de Pistache</h3>
-                    <p class="descripcion">Delicados y elegantes, con sabor a pistache natural y un toque crujiente en
-                        el frosting.</p>
-                    <p class="ingredientes">Ingredientes: harina, mantequilla, azúcar, huevo, pistaches molidos, esencia
-                        de vainilla.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$250 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Cupcakes de Pistache" data-precio="250"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="cupcakes">
-                    <img src="postres/Matcha-Cupcakes.jpg" alt="Cupcakes de Matcha">
-                    <h3>Cupcakes de Matcha</h3>
-                    <p class="descripcion">Esponjosos y con el toque distintivo del té verde matcha, coronados con un
-                        suave glaseado blanco.</p>
-                    <p class="ingredientes">Ingredientes: harina, mantequilla, azúcar, huevo, polvo de matcha, leche.
-                    </p>
-                    <div class="precio-carrito">
-                        <p class="precio">$240 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Cupcakes de Matcha" data-precio="240"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-
-                <!-- Otros postres -->
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/gelatinamosaico.jpg" alt="Gelatina Mosaico">
-                    <h3>Gelatina Mosaico</h3>
-                    <p class="descripcion">Colorida gelatina mosaico con diferentes sabores y lechera.</p>
-                    <p class="ingredientes">Ingredientes: Gelatina de varios sabores, leche condensada, crema.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$150 MXN</p>
-                        <button class="btn-agregar" data-producto="Gelatina Mosaico" data-precio="150"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/cake-pops-faciles.jpg" alt="Cakepops">
-                    <h3>Cakepops</h3>
-                    <p class="descripcion">Deliciosas bolitas de pastel cubiertas con chocolate y decoradas con chispas,
-                        ideales para cualquier ocasión.</p>
-                    <p class="ingredientes">Ingredientes: Pan de vainilla, queso crema, cobertura de chocolate, chispas
-                        de colores.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$180 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Cakepops" data-precio="180"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/gelatinaimposible.jpeg" alt="Gelatina Imposible">
-                    <h3>Gelatina Imposible</h3>
-                    <p class="descripcion">Gelatina con flan, una combinación deliciosa de dos texturas.</p>
-                    <p class="ingredientes">Ingredientes: Gelatina, leche condensada, huevo, vainilla.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$180 MXN</p>
-                        <button class="btn-agregar" data-producto="Gelatina Imposible" data-precio="180"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/pay-de-queso.jpeg" alt="Pay de Queso">
-                    <h3>Pay de Queso</h3>
-                    <p class="descripcion">Cremoso pay de queso con base de galleta y topping de frutos rojos.</p>
-                    <p class="ingredientes">Ingredientes: Queso crema, galletas, mantequilla, azúcar, huevo, frutos
-                        rojos.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$280 MXN</p>
-                        <button class="btn-agregar" data-producto="Pay de Queso" data-precio="280"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/flannapolitano.jpeg" alt="Flan Napolitano">
-                    <h3>Flan Napolitano</h3>
-                    <p class="descripcion">Tradicional flan con caramelo y cubierto con crema batida.</p>
-                    <p class="ingredientes">Ingredientes: Huevo, leche condensada, leche evaporada, vainilla, azúcar.
-                    </p>
-                    <div class="precio-carrito">
-                        <p class="precio">$160 MXN</p>
-                        <button class="btn-agregar" data-producto="Flan Napolitano" data-precio="160"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/gelatinamango.jpeg" alt="Gelatina de Mango">
-                    <h3>Gelatina de Mango</h3>
-                    <p class="descripcion">Refrescante y tropical, con el sabor dulce y jugoso del mango, perfecta para
-                        disfrutar en cualquier momento del día.</p>
-                    <p class="ingredientes">Ingredientes: pulpa de mango, agua, azúcar, grenetina, jugo de limón.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$90 MXN (por porción)</p>
-                        <button class="btn-agregar" data-producto="Gelatina de Mango" data-precio="90"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/pastelboda.jpeg" alt="Pastel de Boda Elegante">
-                    <h3>Pastel de Boda Elegante</h3>
-                    <p class="descripcion">Un pastel de varios pisos cubierto de fondant blanco y decorado con flores
-                        naturales. Elegancia y dulzura para el día más especial.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevo, mantequilla, azúcar, vainilla, fondant, flores
-                        comestibles.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$1200 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de Boda Elegante" data-precio="1200"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/pastelsanvalentin.jpg" alt="Pastel de San Valentín">
-                    <h3>Pastel de San Valentín</h3>
-                    <p class="descripcion">Bizcocho de chocolate relleno de fresa y cubierto con betún rosado, en forma
-                        de corazón. El detalle perfecto para regalar amor.</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevo, azúcar, cacao, fresas, betún, colorante
-                        natural.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$450 MXN</p>
-                        <button class="btn-agregar" data-producto="Pastel de San Valentín" data-precio="450"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/minitartas.jpg" alt="Mini Tartas Individuales">
-                    <h3>Mini Tartas Individuales</h3>
-                    <p class="descripcion">Pequeñas tartas con base de galleta y relleno de crema o frutas frescas, con
-                        presentación elegante para cualquier evento.</p>
-                    <p class="ingredientes">Ingredientes: Harina, mantequilla, azúcar, frutas frescas, crema pastelera.
-                    </p>
-                    <div class="precio-carrito">
-                        <p class="precio">$220 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Mini Tartas Individuales" data-precio="220"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/tiramisu.jpg" alt="Tiramisú Clásico">
-                    <h3>Tiramisú Clásico</h3>
-                    <p class="descripcion">Postre italiano con capas de bizcocho empapadas en café, crema mascarpone y
-                        cacao espolvoreado. Un toque de elegancia en cada cucharada.</p>
-                    <p class="ingredientes">Ingredientes: Queso mascarpone, café, huevos, azúcar, cacao en polvo,
-                        bizcochos.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$250 MXN</p>
-                        <button class="btn-agregar" data-producto="Tiramisú Clásico" data-precio="250"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/oreofrio.jpg" alt="Postre Frío de Oreo">
-                    <h3>Postre Frío de Oreo</h3>
-                    <p class="descripcion">Capas cremosas de galleta Oreo, crema batida y chocolate derretido.
-                        Refrescante y delicioso, ideal para los días calurosos.</p>
-                    <p class="ingredientes">Ingredientes: Galletas Oreo, crema batida, leche condensada, chocolate.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$160 MXN</p>
-                        <button class="btn-agregar" data-producto="Postre Frío de Oreo" data-precio="160"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/brownies.jpg" alt="Brownies Gourmet">
-                    <h3>Brownies Gourmet</h3>
-                    <p class="descripcion">Brownies suaves por dentro y crujientes por fuera, con trozos de nuez y
-                        chocolate. ¡Un clásico irresistible!</p>
-                    <p class="ingredientes">Ingredientes: Harina, huevo, azúcar, cacao, mantequilla, nueces, chocolate.
-                    </p>
-                    <div class="precio-carrito">
-                        <p class="precio">$200 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Brownies Gourmet" data-precio="200"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-
-                <div class="producto-item" data-categoria="otros">
-                    <img src="postres/Mini-Pavlova25-1.jpg" alt="Mini Pavlovas">
-                    <h3>Mini Pavlovas</h3>
-                    <p class="descripcion">Delicadas bases de merengue crujiente rellenas con crema batida y frutas
-                        tropicales. Ligeras y perfectas para eventos elegantes.</p>
-                    <p class="ingredientes">Ingredientes: Claras de huevo, azúcar, crema batida, frutas tropicales.</p>
-                    <div class="precio-carrito">
-                        <p class="precio">$260 MXN (6 pzas)</p>
-                        <button class="btn-agregar" data-producto="Mini Pavlovas" data-precio="260"><i
-                                class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
+            <div class="productos-grid" id="productos-container">
+                <!-- Los productos se cargarán aquí dinámicamente -->
             </div>
         </div>
     </section>
@@ -919,6 +165,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
         import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
         // Tu configuración (la misma de tu login)
         const firebaseConfig = {
@@ -932,6 +179,35 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const ref = doc(db, "usuarios", user.uid);
+                const snap = await getDoc(ref);
+
+                if (snap.exists()) {
+                    const rol = snap.data().rol;
+                    console.log("Rol del usuario:", rol);
+
+                    if (rol === "admin") {
+                        // Mostrar paneles de administración
+                        document.getElementById("btnAgregarProducto").style.display = "block";
+                        document.getElementById("btnEditarProducto").style.display = "block";
+                    } else {
+                        // Ocultar paneles o redirigir
+                        document.getElementById("btnAgregarProducto").style.display = "none";
+                        document.getElementById("btnEditarProducto").style.display = "none";
+                    }
+                } else {
+                    console.warn("Usuario sin rol definido en Firestore.");
+                }
+            } else {
+                // Usuario no autenticado, ocultar paneles de administración
+                document.getElementById("btnAgregarProducto").style.display = "none";
+                document.getElementById("btnEditarProducto").style.display = "none";
+            }
+        });
 
         // Detectar el botón
         const btnLogout = document.getElementById("btnLogout");
@@ -964,6 +240,54 @@
                 }
             }
         })
+
+        document.getElementById("btnAgregarProducto").addEventListener("click", () => {
+            // Redirige a la página de agregar producto
+            window.location.href = "AgregarProducto.html";
+        });
+
+        document.getElementById("btnEditarProducto").addEventListener("click", () => {
+            // Redirige a la página de editar producto
+            window.location.href = "panel_admin.html";
+        });
+
+        async function cargarProductos() {
+            const contenedor = document.getElementById("productos-container");
+            contenedor.innerHTML = "<p>Cargando productos...</p>";
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "productos"));
+                contenedor.innerHTML = ""; // limpiar al terminar de cargar
+
+                querySnapshot.forEach((doc) => {
+                    const producto = doc.data();
+                    const card = document.createElement("div");
+                    card.classList.add("producto-item");
+                    card.setAttribute("data-categoria", producto.categoria);
+
+                    card.innerHTML = `
+                                    <img src="${producto.imagen}" alt="${producto.nombre}">
+                                    <h3>${producto.nombre}</h3>
+                                    <p class="descripcion">${producto.descripcion}</p>
+                                    <p class="ingredientes"><strong>Ingredientes:</strong> ${producto.ingredientes}</p>
+                                    <div class="precio-carrito">
+                                    <p class="precio">$${producto.precio} MXN</p>
+                                    <button class="btn-agregar" data-producto="${producto.nombre}" data-precio="${producto.precio}">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                    </div>
+                                `;
+
+                    contenedor.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error("Error al cargar productos:", error);
+                contenedor.innerHTML = "<p>Error al cargar los productos 😢</p>";
+            }
+        }
+        // Llamar a la función al cargar la página
+        cargarProductos();
     </script>
 </body>
 
