@@ -70,8 +70,8 @@
                 <button class="filtro-btn" data-categoria="roscas">Roscas</button>
                 <button class="filtro-btn" data-categoria="cupcakes">Cupcakes</button>
                 <button class="filtro-btn" data-categoria="otros">Otros</button>
-                <button class="filtro-btn" id="btnAgregarProducto">➕Añadir Producto</button>
-                <button class="filtro-btn" id="btnEditarProducto">🖋️Editar Producto</button>
+                <button class="filtro-btn" id="btnAgregarProducto" style="display: none;">➕Añadir Producto</button>
+                <button class="filtro-btn" id="btnEditarProducto" style="display: none;">🖋️Editar Producto</button>
             </div>
             <div class="productos-grid" id="productos-container">
                 <!-- Los productos se cargarán aquí dinámicamente -->
@@ -181,6 +181,34 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const ref = doc(db, "usuarios", user.uid);
+                const snap = await getDoc(ref);
+
+                if (snap.exists()) {
+                    const rol = snap.data().rol;
+                    console.log("Rol del usuario:", rol);
+
+                    if (rol === "admin") {
+                        // Mostrar paneles de administración
+                        document.getElementById("btnAgregarProducto").style.display = "block";
+                        document.getElementById("btnEditarProducto").style.display = "block";
+                    } else {
+                        // Ocultar paneles o redirigir
+                        document.getElementById("btnAgregarProducto").style.display = "none";
+                        document.getElementById("btnEditarProducto").style.display = "none";
+                    }
+                } else {
+                    console.warn("Usuario sin rol definido en Firestore.");
+                }
+            } else {
+                // Usuario no autenticado, ocultar paneles de administración
+                document.getElementById("btnAgregarProducto").style.display = "none";
+                document.getElementById("btnEditarProducto").style.display = "none";
+            }
+        });
+
         // Detectar el botón
         const btnLogout = document.getElementById("btnLogout");
 
@@ -214,13 +242,13 @@
         })
 
         document.getElementById("btnAgregarProducto").addEventListener("click", () => {
-        // Redirige a la página de agregar producto
-        window.location.href = "AgregarProducto.html";
+            // Redirige a la página de agregar producto
+            window.location.href = "AgregarProducto.html";
         });
 
         document.getElementById("btnEditarProducto").addEventListener("click", () => {
-        // Redirige a la página de editar producto
-        window.location.href = "panel_admin.html";
+            // Redirige a la página de editar producto
+            window.location.href = "panel_admin.html";
         });
 
         async function cargarProductos() {
