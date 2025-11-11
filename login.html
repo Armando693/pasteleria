@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/Estilosgenerales.css">
 </head>
+
 <body>
   <section>
     <form id="loginForm">
@@ -41,7 +43,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
     const firebaseConfig = {
       apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
       authDomain: "cuyecitosbd-49824.firebaseapp.com",
@@ -53,6 +55,7 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
     // --- INICIO DE SESIÓN ---
     const form = document.getElementById("loginForm");
@@ -63,18 +66,44 @@
       const password = document.getElementById("password").value;
 
       try {
+        // 🔐 Iniciar sesión
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        alert(`¡Bienvenido, ${email}! 🎉`);
-        
+        const user = userCredential.user;
+
+        if (!user.emailVerified) {
+          alert("⚠️ Debes verificar tu correo antes de ingresar.");
+          await auth.signOut();
+          return;
+        }
+
+        // 🔎 Obtener datos del usuario desde Firestore
+        const ref = doc(db, "usuarios", user.uid);
+        const snap = await getDoc(ref);
+
+        let nombreUsuario = email; // por si no hay registro en Firestore
+        let rolUsuario = "usuario";
+
+        if (snap.exists()) {
+          const datos = snap.data();
+          nombreUsuario = datos.nombre || email;
+          rolUsuario = datos.rol || "usuario";
+        }
+
+        // 💾 Guardar sesión en localStorage
         const usuario = {
+          uid: user.uid,
           email: email,
-          nombre: "Usuario Cuyecitos" // Puedes cambiarlo si guardas nombre real
+          nombre: nombreUsuario,
+          rol: rolUsuario
         };
         localStorage.setItem("usuario", JSON.stringify(usuario));
 
-        window.location.href = "index.html"; // Redirige al inicio
+        alert(`¡Bienvenido, ${nombreUsuario}! 🎉`);
+        window.location.href = "index.html"; // Redirigir al inicio
+
       } catch (error) {
         alert("Error al iniciar sesión: " + error.message);
+        console.error(error);
       }
     });
 
@@ -108,4 +137,5 @@
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>

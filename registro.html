@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="css/Estilosgenerales.css">
   <title>Formulario de Registro</title>
 </head>
+
 <body>
 
   <form id="registroForm">
@@ -39,7 +41,7 @@
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
     import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
+    import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
     // Configuración de tu proyecto Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
@@ -82,7 +84,11 @@
         const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
         const user = userCredential.user;
 
-          // 🟢 Actualizar el perfil con el nombre (para usarlo luego en el login)
+        // Enviar correo de verificación
+        await sendEmailVerification(user);
+        alert("Se ha enviado un correo de verificación. Por favor, verifica tu correo antes de iniciar sesión.");
+
+        // 🟢 Actualizar el perfil con el nombre (para usarlo luego en el login)
         await updateProfile(user, {
           displayName: `${nombre} ${apellido}`
         });
@@ -94,8 +100,12 @@
           apellido: apellido,
           email: email,
           creadoEn: new Date(),
-          rol: "usuario"
+          rol: "usuario",
+          verificado: false
         });
+
+        // 🔒 Cerrar sesión hasta que verifique su correo
+        await auth.signOut();
 
         alert("Registro exitoso 🎉");
         form.reset();
@@ -108,4 +118,5 @@
   </script>
 
 </body>
+
 </html>

@@ -166,7 +166,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
         import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
         // Tu configuración (la misma de tu login)
         const firebaseConfig = {
@@ -184,19 +184,18 @@
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const ref = doc(db, "usuarios", user.uid);
-                const snap = await getDoc(ref);
+                const q = query(collection(db, "usuarios"), where("uid", "==", user.uid));
+                const querySnapshot = await getDocs(q);
 
-                if (snap.exists()) {
-                    const rol = snap.data().rol;
+                if (!querySnapshot.empty) {
+                    const docSnap = querySnapshot.docs[0];
+                    const rol = docSnap.data().rol;
                     console.log("Rol del usuario:", rol);
 
                     if (rol === "admin") {
-                        // Mostrar paneles de administración
                         document.getElementById("btnAgregarProducto").style.display = "block";
                         document.getElementById("btnEditarProducto").style.display = "block";
                     } else {
-                        // Ocultar paneles o redirigir
                         document.getElementById("btnAgregarProducto").style.display = "none";
                         document.getElementById("btnEditarProducto").style.display = "none";
                     }
