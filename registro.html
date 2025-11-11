@@ -38,12 +38,16 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
     // Configuración de tu proyecto Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
       authDomain: "cuyecitosbd-49824.firebaseapp.com",
-      projectId:  "cuyecitosbd-49824",
+      projectId: "cuyecitosbd-49824",
+      storageBucket: "cuyecitosbd-49824.appspot.com",
+      messagingSenderId: "469768470210",
+      appId: "1:469768470210:web:d9e7f7dc6cf57365c08a6c"
     };
 
     // Inicializar Firebase
