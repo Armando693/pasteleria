@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administrar Usuarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        #buscador {
+            margin-bottom: 20px;
+            padding: 8px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #2c3e50;
+            color: white;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        select,
+        input[type="email"] {
+            padding: 4px;
+            font-size: 0.9rem;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <h2>👥 Panel de administración de usuarios</h2>
+    <p>Aquí puedes buscar, editar correos y cambiar roles de los usuarios registrados.</p>
+
+    <!-- 🔍 Barra de búsqueda -->
+    <input type="text" id="buscador" placeholder="Buscar por nombre o correo..." />
+
+    <table id="tablaUsuarios">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- 🔐 Modal de confirmación de contraseña -->
+    <div id="modalReauth" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-2xl shadow-lg w-80 text-center">
+            <h2 class="text-xl font-semibold mb-3">Verificación de seguridad 🔒</h2>
+            <p class="text-gray-600 mb-4">Por favor, ingresa tu contraseña actual para continuar.</p>
+            <input type="password" id="inputPasswordReauth" class="border border-gray-300 rounded-md p-2 w-full mb-4"
+                placeholder="Contraseña">
+            <div class="flex justify-between">
+                <button id="btnCancelarReauth"
+                    class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded-md">Cancelar</button>
+                <button id="btnConfirmarReauth"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, doc, updateDoc, query, where } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, verifyBeforeUpdateEmail } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+        // ⚙️ Configuración Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
+            authDomain: "cuyecitosbd-49824.firebaseapp.com",
+            projectId: "cuyecitosbd-49824",
+            storageBucket: "cuyecitosbd-49824.appspot.com",
+            messagingSenderId: "469768470210",
+            appId: "1:469768470210:web:d9e7f7dc6cf57365c08a6c"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        let usuariosCargados = []; // Lista de usuarios cargados
+
+        // 🔐 Verificar que el usuario actual sea admin
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                alert("⚠️ Debes iniciar sesión como administrador.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            try {
+                // Buscar en Firestore el documento del usuario logueado
+                const q = query(collection(db, "usuarios"), where("uid", "==", user.uid));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    console.warn("⚠️ No se encontró el usuario en Firestore.");
+                    alert("❌ No tienes permisos para acceder a esta página.");
+                    window.location.href = "index.html";
+                    return;
+                }
+
+                const docSnap = querySnapshot.docs[0];
+                const datos = docSnap.data();
+                console.log("Usuario actual:", datos);
+
+                if (datos.rol === "admin") {
+                    console.log("✅ Acceso concedido. Bienvenido admin.");
+                    cargarUsuarios();
+                } else {
+                    alert("❌ No tienes permisos para acceder a esta página.");
+                    window.location.href = "index.html";
+                }
+            } catch (error) {
+                console.error("Error verificando rol de usuario:", error);
+                alert("⚠️ Ocurrió un error al verificar permisos.");
+                window.location.href = "index.html";
+            }
+        });
+
+        // 📦 Cargar todos los usuarios
+        async function cargarUsuarios() {
+            const tabla = document.querySelector("#tablaUsuarios tbody");
+            tabla.innerHTML = "<tr><td colspan='5'>Cargando...</td></tr>";
+
+            const usuariosRef = collection(db, "usuarios");
+            const snapshot = await getDocs(usuariosRef);
+            usuariosCargados = [];
+
+            snapshot.forEach((docu) => {
+                usuariosCargados.push({ id: docu.id, ...docu.data() });
+            });
+
+            mostrarUsuarios(usuariosCargados);
+        }
+
+        // 🧩 Mostrar usuarios en tabla
+        function mostrarUsuarios(lista) {
+            const tabla = document.querySelector("#tablaUsuarios tbody");
+            tabla.innerHTML = "";
+
+            if (lista.length === 0) {
+                tabla.innerHTML = "<tr><td colspan='5'>No se encontraron usuarios.</td></tr>";
+                return;
+            }
+
+            lista.forEach((u) => {
+                const fila = document.createElement("tr");
+                fila.innerHTML = `
+            <td>${u.nombre || "-"}</td>
+            <td>${u.apellido || "-"}</td>
+            <td><input type="email" value="${u.email}" data-uid="${u.uid}" class="input-email" style="width: 90%"></td>
+            <td>
+                <select class="input-rol" data-uid="${u.uid}">
+                    <option value="usuario" ${u.rol === "usuario" ? "selected" : ""}>Usuario</option>
+                    <option value="admin" ${u.rol === "admin" ? "selected" : ""}>Admin</option>
+                </select>
+            </td>
+            <td><button class="btn-guardar" data-uid="${u.uid}">💾 Guardar</button></td>
+        `;
+                tabla.appendChild(fila);
+            });
+
+            // 🎯 Escuchar clics en los botones de guardar
+            document.querySelectorAll(".btn-guardar").forEach(btn => {
+                btn.addEventListener("click", async (e) => {
+                    const uid = e.target.getAttribute("data-uid");
+                    const nuevoEmail = document.querySelector(`.input-email[data-uid="${uid}"]`).value;
+                    const nuevoRol = document.querySelector(`.input-rol[data-uid="${uid}"]`).value;
+
+                    try {
+                        const q = query(collection(db, "usuarios"), where("uid", "==", uid));
+                        const snapshot = await getDocs(q);
+
+                        if (!snapshot.empty) {
+                            const userDoc = snapshot.docs[0];
+                            const ref = doc(db, "usuarios", userDoc.id);
+                            const usuarioActual = auth.currentUser;
+
+                            // Si el admin intenta cambiar SU PROPIO correo
+                            if (usuarioActual.uid === uid && usuarioActual.email !== nuevoEmail) {
+                                // Mostrar modal de contraseña
+                                const modal = document.getElementById("modalReauth");
+                                const inputPass = document.getElementById("inputPasswordReauth");
+                                const btnConfirmar = document.getElementById("btnConfirmarReauth");
+                                const btnCancelar = document.getElementById("btnCancelarReauth");
+
+                                modal.classList.remove("hidden");
+                                inputPass.value = "";
+                                inputPass.focus();
+
+                                // Función para cerrar modal
+                                const cerrarModal = () => modal.classList.add("hidden");
+
+                                // Cancelar
+                                btnCancelar.onclick = () => cerrarModal();
+
+                                // Confirmar reautenticación
+                                btnConfirmar.onclick = async () => {
+                                    const pass = inputPass.value.trim();
+                                    if (!pass) {
+                                        alert("⚠️ Ingresa tu contraseña.");
+                                        return;
+                                    }
+
+                                    try {
+                                        const { EmailAuthProvider, reauthenticateWithCredential } = await import("https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js");
+                                        const credencial = EmailAuthProvider.credential(usuarioActual.email, pass);
+                                        await reauthenticateWithCredential(usuarioActual, credencial);
+
+                                        // ✅ Ahora sí, enviar correo de verificación
+                                        await verifyBeforeUpdateEmail(usuarioActual, nuevoEmail);
+                                        alert("📧 Se envió un correo para confirmar el cambio de dirección.");
+
+                                        cerrarModal();
+                                    } catch (error) {
+                                        console.error("Error en reautenticación:", error);
+                                        alert("❌ Error: " + error.message);
+                                    }
+                                };
+                            }
+
+                            // 🔄 Actualizar datos en Firestore
+                            await updateDoc(ref, { email: nuevoEmail, rol: nuevoRol });
+                            alert("✅ Cambios guardados correctamente.");
+                        }
+                    } catch (error) {
+                        console.error("Error al actualizar usuario:", error);
+                        alert("❌ Error: " + error.message);
+                    }
+                });
+            });
+        }
+
+        // 🔍 Búsqueda dinámica
+        const buscador = document.getElementById("buscador");
+        buscador.addEventListener("input", () => {
+            const texto = buscador.value.toLowerCase();
+            const filtrados = usuariosCargados.filter(u =>
+                (u.nombre && u.nombre.toLowerCase().includes(texto)) ||
+                (u.email && u.email.toLowerCase().includes(texto))
+            );
+            mostrarUsuarios(filtrados);
+        });
+    </script>
+
+
+</body>
+
+</html>

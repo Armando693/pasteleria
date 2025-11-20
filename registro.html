@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
   <form id="registroForm">
     <h2>Registro</h2>
 
@@ -102,12 +101,11 @@
           verificado: false
         });
 
-        // 🔒 Cerrar sesión hasta que verifique su correo
-        await auth.signOut();
-
         alert("Registro exitoso 🎉");
         form.reset();
         window.location.href = "login.html"; // Redirigir al login
+        // 🔒 Cerrar sesión hasta que verifique su correo
+        await auth.signOut();
       } catch (error) {
         console.error(error);
         errorMensaje.textContent = "Error al registrar: " + error.message;
