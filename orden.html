@@ -352,6 +352,8 @@
                                 </p>
                             </div>
                             </div>
+                            <!-- capcha -->
+                            <div class="g-recaptcha" data-sitekey="6LfPgxMsAAAAAP3NRIOAEZTBCMmZj_BWYIih_a5t"></div>
                     <button type="submit" class="btn-enviar-alt">
                         <i class="fas fa-paper-plane"></i>
                         Confirmar Pedido
@@ -362,6 +364,8 @@
         </div>
         </div>
     </section>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
     <!-- Footer -->
     <footer>
@@ -552,6 +556,54 @@
         })
     </script>
 
+
+<!-- Validación del formulario capcha -->
+<script>
+window.addEventListener('load', function() {
+  const form = document.getElementById('form-orden');
+  if (!form) return;
+
+  // Mensaje de error (creamos dinámicamente)
+  let errorEl = document.createElement('div');
+  errorEl.id = 'captcha-error';
+  errorEl.style.display = 'none';
+  errorEl.style.color = '#c0392b';
+  errorEl.style.marginTop = '8px';
+  errorEl.textContent = '⚠ Por favor completa el CAPTCHA antes de confirmar tu pedido.';
+  // Insertamos el mensaje justo debajo del recaptcha (si existe)
+  const captchaDiv = document.querySelector('.g-recaptcha');
+  if (captchaDiv && captchaDiv.parentNode) captchaDiv.parentNode.insertBefore(errorEl, captchaDiv.nextSibling);
+
+  form.addEventListener('submit', function(evt) {
+    // grecaptcha es provisto por el script de Google; verifica que exista
+    if (typeof grecaptcha === 'undefined') {
+      // Si grecaptcha no está listo, prevenimos envío y avisamos
+      evt.preventDefault();
+      alert('El servicio reCAPTCHA no está cargado. Intenta recargar la página.');
+      return false;
+    }
+
+    const response = grecaptcha.getResponse();
+    if (!response || response.length === 0) {
+      evt.preventDefault();
+      // Mostrar mensaje bonito en lugar de alert
+      if (errorEl) {
+        errorEl.style.display = 'block';
+        // opcional: focus al captcha
+        captchaDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        alert('⚠ Por favor completa el CAPTCHA antes de confirmar tu pedido.');
+      }
+      return false;
+    } else {
+      // si existe mensaje de error, ocultarlo al estar correcto
+      if (errorEl) errorEl.style.display = 'none';
+      // Aquí puedes añadir lógica adicional antes de enviar (ej. deshabilitar botón)
+      return true; // permite envío
+    }
+  });
+});
+</script>
 </body>
 
 </html>
