@@ -21,22 +21,22 @@ let totalExtras = 0;
 let filtroBtns = document.querySelectorAll('.filtro-btn');
 
 // Inicialización
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('Inicializando página...');
-    
+
     // Cargar carrito desde localStorage
     loadCart();
-    
+
     // Configurar eventos
     setupCartEvents();
     setupChatbotEvents();
     setupProductFilters();
     setupOrderForm();
     setupPersonalizacionEvents();
-    
+
     // Cargar mapa
     loadSimpleMap();
-    
+
     console.log('Página inicializada correctamente');
 });
 
@@ -45,30 +45,30 @@ document.addEventListener('DOMContentLoaded', function() {
 function setupCartEvents() {
     // Botones para agregar al carrito
     document.querySelectorAll('.btn-agregar').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const producto = this.getAttribute('data-producto');
             const precio = parseInt(this.getAttribute('data-precio'));
             addToCart(producto, precio);
         });
     });
-    
+
     // Abrir/cerrar carrito
     if (cartToggle) {
-        cartToggle.addEventListener('click', function(e) {
+        cartToggle.addEventListener('click', function (e) {
             e.preventDefault();
             cartSidebar.classList.add('open');
         });
     }
-    
+
     if (closeCart) {
-        closeCart.addEventListener('click', function() {
+        closeCart.addEventListener('click', function () {
             cartSidebar.classList.remove('open');
         });
     }
-    
+
     // Botón de checkout
     if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', function() {
+        checkoutBtn.addEventListener('click', function () {
             if (cart.length === 0) {
                 alert('Tu carrito está vacío. Agrega algunos productos antes de realizar el pedido.');
                 return;
@@ -77,9 +77,9 @@ function setupCartEvents() {
         });
     }
     // Cerrar carrito al hacer clic fuera de él
-    document.addEventListener('click', function(e) {
-        if (cartSidebar.classList.contains('open') && 
-            !cartSidebar.contains(e.target) && 
+    document.addEventListener('click', function (e) {
+        if (cartSidebar.classList.contains('open') &&
+            !cartSidebar.contains(e.target) &&
             !e.target.closest('.cart-icon')) {
             cartSidebar.classList.remove('open');
         }
@@ -88,10 +88,10 @@ function setupCartEvents() {
 
 function addToCart(producto, precio) {
     console.log('Agregando al carrito:', producto, precio);
-    
+
     // Verificar si el producto ya está en el carrito
     const existingItem = cart.find(item => item.producto === producto);
-    
+
     if (existingItem) {
         existingItem.cantidad += 1;
     } else {
@@ -101,7 +101,7 @@ function addToCart(producto, precio) {
             cantidad: 1
         });
     }
-    
+
     updateCart();
     showNotification(`${producto} agregado al carrito`);
 }
@@ -118,7 +118,7 @@ function removeFromCart(index) {
 function updateQuantity(index, change) {
     if (index >= 0 && index < cart.length) {
         cart[index].cantidad += change;
-        
+
         if (cart[index].cantidad <= 0) {
             removeFromCart(index);
         } else {
@@ -133,11 +133,11 @@ function updateCart() {
     if (cartCount) {
         cartCount.textContent = totalItems;
     }
-    
+
     // Actualizar lista de productos en el carrito
     if (cartItems) {
         cartItems.innerHTML = '';
-        
+
         if (cart.length === 0 && extrasSeleccionados.length === 0) {
             cartItems.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
         } else {
@@ -161,14 +161,14 @@ function updateCart() {
                 `;
                 cartItems.appendChild(cartItem);
             });
-            
+
             // Mostrar extras en el carrito
             if (extrasSeleccionados.length > 0) {
                 const extrasHeader = document.createElement('div');
                 extrasHeader.className = 'cart-extras-header';
                 extrasHeader.innerHTML = '<h4>Personalización:</h4>';
                 cartItems.appendChild(extrasHeader);
-                
+
                 extrasSeleccionados.forEach((extra, index) => {
                     const extraItem = document.createElement('div');
                     extraItem.className = 'cart-item cart-extra-item';
@@ -186,23 +186,23 @@ function updateCart() {
                     cartItems.appendChild(extraItem);
                 });
             }
-            
+
             // Configurar eventos para los botones del carrito
             setupCartItemEvents();
         }
     }
-    
+
     // Actualizar total - ¡AHORA INCLUYE EXTRAS!
     const subtotal = cart.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
     const total = subtotal + totalExtras;
-    
+
     if (cartTotal) {
         cartTotal.textContent = `$${total} MXN`;
     }
-    
+
     // Actualizar resumen en página de orden
     updateOrderSummary();
-    
+
     // Guardar carrito en localStorage
     saveCart();
 }
@@ -210,37 +210,37 @@ function updateCart() {
 function setupCartItemEvents() {
     // Usar event delegation en el contenedor del carrito
     if (cartItems) {
-        cartItems.addEventListener('click', function(e) {
+        cartItems.addEventListener('click', function (e) {
             const target = e.target;
             const cartItem = target.closest('.cart-item');
-            
+
             if (!cartItem) return;
-            
+
             // Manejar extras del carrito
             if (cartItem.classList.contains('cart-extra-item')) {
                 const items = Array.from(cartItems.querySelectorAll('.cart-extra-item'));
                 const currentIndex = items.indexOf(cartItem);
-                
+
                 if (target.classList.contains('remove-extra') || target.closest('.remove-extra')) {
                     removeExtra(currentIndex);
                 }
                 return;
             }
-            
+
             // Manejar productos normales
             const items = Array.from(cartItems.querySelectorAll('.cart-item:not(.cart-extra-item)'));
             const currentIndex = items.indexOf(cartItem);
-            
+
             // Manejar botón de disminuir cantidad
             if (target.classList.contains('minus') || target.closest('.minus')) {
                 updateQuantity(currentIndex, -1);
             }
-            
+
             // Manejar botón de aumentar cantidad
             if (target.classList.contains('plus') || target.closest('.plus')) {
                 updateQuantity(currentIndex, 1);
             }
-            
+
             // Manejar botón de eliminar
             if (target.classList.contains('remove-item') || target.closest('.remove-item')) {
                 removeFromCart(currentIndex);
@@ -253,37 +253,37 @@ function setupCartItemEvents() {
 // ===== FUNCIONES PARA EXTRAS/PERSONALIZACIÓN =====
 function setupPersonalizacionEvents() {
     console.log('Buscando elementos de personalización...');
-    
+
     // Buscar TODOS los checkboxes de personalización
     const personalizacionCheckboxes = document.querySelectorAll('.personalizacion-item input[type="checkbox"], input[name="extras[]"]');
     console.log('Checkboxes encontrados:', personalizacionCheckboxes.length);
-    
+
     personalizacionCheckboxes.forEach((checkbox, index) => {
         console.log(`Checkbox ${index}:`, checkbox.id, checkbox.value, checkbox.getAttribute('data-precio'));
-        
+
         // Remover event listeners previos para evitar duplicados
         checkbox.replaceWith(checkbox.cloneNode(true));
     });
-    
+
     // Re-seleccionar después del clone
     const refreshedCheckboxes = document.querySelectorAll('.personalizacion-item input[type="checkbox"], input[name="extras[]"]');
-    
+
     refreshedCheckboxes.forEach((checkbox) => {
-        checkbox.addEventListener('change', function() {
+        checkbox.addEventListener('change', function () {
             console.log('Checkbox cambiado:', this.id, this.checked, this.value, this.getAttribute('data-precio'));
-            
-            const nombre = this.closest('label')?.querySelector('.personalizacion-nombre')?.textContent || 
-                          this.closest('.personalizacion-item')?.querySelector('.personalizacion-nombre')?.textContent ||
-                          'Extra';
+
+            const nombre = this.closest('label')?.querySelector('.personalizacion-nombre')?.textContent ||
+                this.closest('.personalizacion-item')?.querySelector('.personalizacion-nombre')?.textContent ||
+                'Extra';
             const precio = parseInt(this.getAttribute('data-precio')) || 0;
             const id = this.value || `extra-${Date.now()}`;
-            
+
             const extra = {
                 nombre: nombre,
                 precio: precio,
                 id: id
             };
-            
+
             if (this.checked) {
                 extrasSeleccionados.push(extra);
                 console.log('Extra agregado:', extra);
@@ -293,7 +293,7 @@ function setupPersonalizacionEvents() {
                 console.log('Extra removido:', extra);
                 showNotification(`❌ ${extra.nombre} removido`);
             }
-            
+
             updateExtrasTotal();
             updateCart(); // ¡IMPORTANTE! Actualizar el carrito completo
             updateOrderSummary();
@@ -304,7 +304,7 @@ function setupPersonalizacionEvents() {
 function updateExtrasTotal() {
     totalExtras = extrasSeleccionados.reduce((total, extra) => total + extra.precio, 0);
     console.log('Total extras actualizado:', totalExtras, 'Extras:', extrasSeleccionados);
-    
+
     const extrasTotalElement = document.getElementById('extras-total');
     if (extrasTotalElement) {
         extrasTotalElement.textContent = `$${totalExtras} MXN`;
@@ -315,7 +315,7 @@ function removeExtra(index) {
     if (index >= 0 && index < extrasSeleccionados.length) {
         const extraEliminado = extrasSeleccionados[index];
         extrasSeleccionados.splice(index, 1);
-        
+
         // Desmarcar el checkbox correspondiente
         const allCheckboxes = document.querySelectorAll('.personalizacion-item input[type="checkbox"], input[name="extras[]"]');
         allCheckboxes.forEach(checkbox => {
@@ -323,7 +323,7 @@ function removeExtra(index) {
                 checkbox.checked = false;
             }
         });
-        
+
         updateExtrasTotal();
         updateCart(); // Actualizar carrito completo
         updateOrderSummary();

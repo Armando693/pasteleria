@@ -136,63 +136,8 @@ function setupExtrasResumenEvents() {
 
 // ===== FORMULARIO DE ORDEN =====
 function setupOrderForm() {
-    const formOrden = document.getElementById('form-orden');
-    if (formOrden) {
-        formOrden.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            if (cart.length === 0) {
-                alert('Tu carrito está vacío. Agrega algunos productos antes de realizar el pedido.');
-                return;
-            }
-
-            const formData = new FormData(this);
-            const ordenData = {
-                nombre: formData.get('nombre'),
-                telefono: formData.get('telefono'),
-                email: formData.get('email'),
-                fechaEntrega: formData.get('fecha-entrega'),
-                horaEntrega: formData.get('hora-entrega'),
-                direccion: formData.get('direccion'),
-                metodoPago: formData.get('metodo-pago'),
-                mensaje: formData.get('mensaje'),
-                productos: cart,
-                extras: extrasSeleccionados,
-                subtotal: cart.reduce((sum, item) => sum + (item.precio * item.cantidad), 0),
-                totalExtras: totalExtras,
-                total: cart.reduce((sum, item) => sum + (item.precio * item.cantidad), 0) + totalExtras
-            };
-
-            const mensajeConfirmacion = `
-¡Pedido realizado con éxito!
-
-Resumen del pedido:
-- Productos: ${ordenData.productos.length} artículo(s)
-- Extras: ${ordenData.extras.length} opción(es) seleccionada(s)
-- Subtotal: $${ordenData.subtotal} MXN
-- Extras: $${ordenData.totalExtras} MXN
-- Total: $${ordenData.total} MXN
-- Método de Pago: ${ordenData.metodoPago}
-Te contactaremos pronto al ${ordenData.telefono} para confirmar los detalles de entrega.
-            `;
-
-            alert(mensajeConfirmacion);
-
-            // Limpiar todo
-            cart = [];
-            extrasSeleccionados = [];
-            totalExtras = 0;
-            updateCart();
-            updateExtrasTotal();
-            updateOrderSummary();
-
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = false;
-            });
-
-            this.reset();
-        });
-    }
+    // Esta función ahora está vacía porque el envío lo maneja Firebase
+    console.log('Formulario de orden - El envío es manejado por Firebase');
 }
 
 // ===== MÉTODO DE PAGO =====
@@ -230,10 +175,4 @@ document.addEventListener("DOMContentLoaded", function () {
         if (emailInput && usuario.email) emailInput.value = usuario.email;
     }
 });
-
-
-
-
-
-
 
