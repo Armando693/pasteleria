@@ -26,7 +26,8 @@
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="productos.html">Productos</a></li>
                     <li><a href="orden.html" class="active">Orden</a></li>
-                    <li><a href="login.html">👨‍🍳</a></li>
+                    <li id="login-item"><a href="login.html">👨‍🍳</a></li>
+                    <li id="user-name" style="display:none;"><span id="nombre-usuario"></span> 👋</li>
                     <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
 
 
@@ -453,9 +454,7 @@
     <script src="js/orden.js"></script>
 
 
-    <!-- SDK de Firebase (versión modular) -->
     <script type="module">
-        // --- Importar Firebase ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
@@ -470,17 +469,20 @@
             appId: "1:612701891221:web:2018fc11f6bb77b96f499c"
         };
 
-        // --- Inicializar Firebase ---
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // --- Verificar si el usuario ha iniciado sesión ---
+        // --- Manejo de login/logout ---
+        const loginItem = document.getElementById("login-item");
+        const btnLogout = document.getElementById("btnLogout");
+
         onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                alert("⚠️ Debes iniciar sesión para hacer un pedido.");
-                window.location.href = "login.html";
-            } else {
+            if (user) {
+                // Ocultar login, mostrar logout
+                if (loginItem) loginItem.style.display = "none";
+                if (btnLogout) btnLogout.style.display = "inline-block";
+
                 // Autocompletar datos del formulario
                 const nombreInput = document.getElementById("nombre");
                 const emailInput = document.getElementById("email");
@@ -491,25 +493,86 @@
                 if (savedNombre && nombreInput) nombreInput.value = savedNombre;
                 if (savedEmail && emailInput) emailInput.value = savedEmail;
 
-                if (!savedNombre && user.displayName && nombreInput)
-                    nombreInput.value = user.displayName;
-                if (!savedEmail && user.email && emailInput)
-                    emailInput.value = user.email;
+                if (!savedNombre && user.displayName && nombreInput) nombreInput.value = user.displayName;
+                if (!savedEmail && user.email && emailInput) emailInput.value = user.email;
+
+            } else {
+                // Usuario no ha iniciado sesión
+                if (loginItem) loginItem.style.display = "inline-block";
+                if (btnLogout) btnLogout.style.display = "none";
             }
         });
 
-        /// --- Guardar pedido ---
+        // --- Cerrar sesión ---
+        if (btnLogout) {
+            btnLogout.addEventListener("click", async () => {
+                try {
+                    await signOut(auth);
+                    localStorage.clear();
+                    alert("👋 Sesión cerrada correctamente");
+                    window.location.href = "index.html";
+                } catch (error) {
+                    alert("❌ Error al cerrar sesión: " + error.message);
+                }
+            });
+        }
+        // --- Mostrar / ocultar botón de cerrar sesión ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const btnLogout = document.getElementById("btnLogout");
+            const loginItem = document.getElementById("login-item");
+            const userNameItem = document.getElementById("user-name");
+            const nombreUsuarioSpan = document.getElementById("nombre-usuario");
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    if (loginItem) loginItem.style.display = "none";
+                    if (btnLogout) btnLogout.style.display = "inline-block";
+                    if (userNameItem && nombreUsuarioSpan) {
+                        const nombre = user.displayName || localStorage.getItem("nombreUsuario") || "Usuario";
+                        nombreUsuarioSpan.textContent = nombre;
+                        userNameItem.style.display = "inline-block";
+                    }
+                } else {
+                    if (loginItem) loginItem.style.display = "inline-block";
+                    if (btnLogout) btnLogout.style.display = "none";
+                    if (userNameItem) userNameItem.style.display = "none";
+                }
+            });
+
+            if (btnLogout) {
+                btnLogout.addEventListener("click", async () => {
+                    try {
+                        await signOut(auth);
+                        localStorage.clear();
+                        alert("👋 Sesión cerrada correctamente");
+                        window.location.href = "index.html";
+                    } catch (error) {
+                        alert("❌ Error al cerrar sesión: " + error.message);
+                    }
+                });
+            }
+        });
+
+        // --- Validación de sesión para pedidos ---
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                alert("⚠️ Debes iniciar sesión para hacer un pedido.");
+                window.location.href = "login.html";
+            }
+        });
+
+        // --- Guardar pedido (tu código original) ---
         document.getElementById("form-orden").addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            // 🛑 Validación de reCAPTCHA
+            // Validación reCAPTCHA
             const recaptchaResponse = grecaptcha.getResponse();
             if (!recaptchaResponse) {
                 alert("Por favor verifica el CAPTCHA antes de enviar el pedido.");
                 return;
             }
 
-            // 🛑 Validar que hay productos en el carrito
+            // Validar carrito
             if (cart.length === 0) {
                 alert('Tu carrito está vacío. Agrega algunos productos antes de realizar el pedido.');
                 return;
@@ -540,12 +603,12 @@
                     totalExtras: totalExtras,
                     total: cart.reduce((sum, item) => sum + (item.precio * item.cantidad), 0) + totalExtras,
                     fechaRegistro: new Date().toISOString(),
-                    recaptchaVerified: true // Para tracking
+                    recaptchaVerified: true
                 });
 
                 alert("🎉 Pedido enviado correctamente. ¡Gracias por confiar en Cuyecitos!");
 
-                // 🧹 Limpiar todo después del envío
+                // Limpiar todo
                 cart = [];
                 extrasSeleccionados = [];
                 totalExtras = 0;
@@ -553,15 +616,8 @@
                 updateExtrasTotal();
                 updateOrderSummary();
 
-                // Limpiar checkboxes de extras
-                document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                    checkbox.checked = false;
-                });
-
-                // Resetear formulario
+                document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => { checkbox.checked = false; });
                 document.getElementById("form-orden").reset();
-
-                // 🔄 Resetear reCAPTCHA
                 grecaptcha.reset();
 
             } catch (error) {
@@ -570,31 +626,8 @@
             }
         });
 
-        // --- Cerrar sesión ---
-        const btnLogout = document.getElementById("btnLogout"); // asegúrate de tener este botón en el HTML
-        if (btnLogout) {
-            btnLogout.addEventListener("click", async () => {
-                try {
-                    await signOut(auth);
-                    localStorage.clear();
-                    alert("👋 Sesión cerrada correctamente");
-                    window.location.href = "index.html";
-                } catch (error) {
-                    alert("❌ Error al cerrar sesión: " + error.message);
-                }
-            });
-        }
-        // --- Mostrar / ocultar botón de cerrar sesión ---
-        onAuthStateChanged(auth, (user) => {
-            if (btnLogout) {
-                if (user) {
-                    btnLogout.style.display = "inline-block"; // mostrar
-                } else {
-                    btnLogout.style.display = "none"; // ocultar
-                }
-            }
-        })
     </script>
+
 </body>
 
 </html>

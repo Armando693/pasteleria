@@ -62,12 +62,15 @@ img {
   border-radius: 6px;
   cursor: pointer;
   transition: 0.3s;
+  display: inline-block;
+  margin-left: 10px; /* agrega espacio a la izquierda */
 }
 
 .btn-logout:hover {
-  background-color:#ff4d73;
+  background-color: #ff1a4d; /* un color distinto al pasar el mouse */
 }
-#btnLogout {
+
+.btnLogout {
   display: none;
 }
 

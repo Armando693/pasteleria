@@ -26,7 +26,8 @@
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="productos.html" class="active">Productos</a></li>
                     <li><a href="orden.html">Orden</a></li>
-                    <li><a href="login.html">👨‍🍳</a></li>
+                    <li id="login-item"><a href="login.html">👨‍🍳</a></li>
+                    <li id="user-name" style="display:none;"><span id="nombre-usuario"></span> 👋</li>
                     <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
 
                     <li class="cart-icon">
@@ -108,8 +109,8 @@
                         <a href="https://www.facebook.com/?locale=es_LA"><i class="fab fa-facebook"></i></a>
                         <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
                         <a href="https://wa.me/528996776960?text=Hola%20Cuyecitos%2C%20quiero%20más%20información"
-                        target="_blank">
-                        <i class="fab fa-whatsapp"></i>
+                            target="_blank">
+                            <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
@@ -239,7 +240,45 @@
                     btnLogout.style.display = "none"; // ocultar
                 }
             }
-        })
+        });
+        const loginLink = document.getElementById("login-link"); // el icono de login
+
+         // --- Mostrar / ocultar botón de cerrar sesión ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const btnLogout = document.getElementById("btnLogout");
+            const loginItem = document.getElementById("login-item");
+            const userNameItem = document.getElementById("user-name");
+            const nombreUsuarioSpan = document.getElementById("nombre-usuario");
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    if (loginItem) loginItem.style.display = "none";
+                    if (btnLogout) btnLogout.style.display = "inline-block";
+                    if (userNameItem && nombreUsuarioSpan) {
+                        const nombre = user.displayName || localStorage.getItem("nombreUsuario") || "Usuario";
+                        nombreUsuarioSpan.textContent = nombre;
+                        userNameItem.style.display = "inline-block";
+                    }
+                } else {
+                    if (loginItem) loginItem.style.display = "inline-block";
+                    if (btnLogout) btnLogout.style.display = "none";
+                    if (userNameItem) userNameItem.style.display = "none";
+                }
+            });
+
+            if (btnLogout) {
+                btnLogout.addEventListener("click", async () => {
+                    try {
+                        await signOut(auth);
+                        localStorage.clear();
+                        alert("👋 Sesión cerrada correctamente");
+                        window.location.href = "index.html";
+                    } catch (error) {
+                        alert("❌ Error al cerrar sesión: " + error.message);
+                    }
+                });
+            }
+        });
 
         document.getElementById("btnAgregarProducto").addEventListener("click", () => {
             // Redirige a la página de agregar producto
@@ -266,17 +305,25 @@
                     card.setAttribute("data-categoria", producto.categoria);
 
                     card.innerHTML = `
-                                    <img src="${producto.imagen}" alt="${producto.nombre}">
-                                    <h3>${producto.nombre}</h3>
-                                    <p class="descripcion">${producto.descripcion}</p>
-                                    <p class="ingredientes"><strong>Ingredientes:</strong> ${producto.ingredientes}</p>
-                                    <div class="precio-carrito">
-                                    <p class="precio">$${producto.precio} MXN</p>
-                                    <button class="btn-agregar" data-producto="${producto.nombre}" data-precio="${producto.precio}">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </button>
-                                    </div>
-                                `;
+                <img src="${producto.imagen}" alt="${producto.nombre}">
+                <h3>${producto.nombre}</h3>
+                <p class="descripcion">${producto.descripcion}</p>
+                <p class="ingredientes"><strong>Ingredientes:</strong> ${producto.ingredientes}</p>
+                <div class="precio-carrito">
+                    <p class="precio">$${producto.precio} MXN</p>
+                    <button class="btn-agregar" data-producto="${producto.nombre}" data-precio="${producto.precio}">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            `;
+
+                    // Agregar evento al botón después de crear la card
+                    const btnAgregar = card.querySelector(".btn-agregar");
+                    btnAgregar.addEventListener("click", () => {
+                        const nombre = producto.nombre;
+                        const precio = parseFloat(producto.precio);
+                        addToCart(nombre, precio); // llama a tu función existente
+                    });
 
                     contenedor.appendChild(card);
                 });
@@ -286,8 +333,10 @@
                 contenedor.innerHTML = "<p>Error al cargar los productos 😢</p>";
             }
         }
+
         // Llamar a la función al cargar la página
         cargarProductos();
+
     </script>
 </body>
 
