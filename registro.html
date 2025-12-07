@@ -33,85 +33,8 @@
     <button type="submit">Registrarse</button>
   </form>
 
-  <!-- Firebase SDK -->
-  <script type="module">
-    // Importar módulos de Firebase
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-    import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, updateProfile} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-    // Configuración de tu proyecto Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
-      authDomain: "cuyecitosbd-49824.firebaseapp.com",
-      projectId: "cuyecitosbd-49824",
-      storageBucket: "cuyecitosbd-49824.appspot.com",
-      messagingSenderId: "469768470210",
-      appId: "1:469768470210:web:d9e7f7dc6cf57365c08a6c"
-    };
-
-    // Inicializar Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth(app);
-
-    // Referencias al formulario
-    const form = document.getElementById("registroForm");
-    const password = document.getElementById("password");
-    const confirmPassword = document.getElementById("confirmPassword");
-    const errorMensaje = document.getElementById("errorMensaje");
-
-    // Evento submit
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      if (password.value !== confirmPassword.value) {
-        errorMensaje.textContent = "Las contraseñas no coinciden.";
-        return;
-      }
-
-      errorMensaje.textContent = "";
-
-      const nombre = document.getElementById("nombre").value;
-      const apellido = document.getElementById("apellido").value;
-      const email = document.getElementById("email").value;
-      const pass = password.value;
-
-      try {
-        // Crear usuario en Authentication
-        const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-        const user = userCredential.user;
-
-        // Enviar correo de verificación
-        await sendEmailVerification(user);
-        alert("Se ha enviado un correo de verificación. Por favor, verifica tu correo antes de iniciar sesión.");
-
-        // 🟢 Actualizar el perfil con el nombre (para usarlo luego en el login)
-        await updateProfile(user, {
-          displayName: `${nombre} ${apellido}`
-        });
-
-        // Guardar datos en Firestore
-        await addDoc(collection(db, "usuarios"), {
-          uid: user.uid,
-          nombre: nombre,
-          apellido: apellido,
-          email: email,
-          creadoEn: new Date(),
-          rol: "usuario",
-          verificado: false
-        });
-
-        alert("Registro exitoso 🎉");
-        form.reset();
-        window.location.href = "login.html"; // Redirigir al login
-        // 🔒 Cerrar sesión hasta que verifique su correo
-        await auth.signOut();
-      } catch (error) {
-        console.error(error);
-        errorMensaje.textContent = "Error al registrar: " + error.message;
-      }
-    });
-  </script>
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/registro.js"></script>
 
 </body>
 

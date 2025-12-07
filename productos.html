@@ -19,22 +19,42 @@
     <header>
         <div class="container">
             <div class="logo">
-                <img src="postres/Logo-modified.png" alt="Cuyecitos Pastelería">
+                <a href="index.html">
+                    <img src="postres/Logo-modified.png" alt="Cuyecitos Pastelería">
+                </a>
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="productos.html" class="active">Productos</a></li>
+                    <li><a href="index.html" class="active">Inicio</a></li>
+                    <li><a href="productos.html">Productos</a></li>
                     <li><a href="orden.html">Orden</a></li>
                     <li id="login-item"><a href="login.html">👨‍🍳</a></li>
                     <li id="user-name" style="display:none;"><span id="nombre-usuario"></span> 👋</li>
                     <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
-
                     <li class="cart-icon">
                         <a href="#" id="cart-toggle">
                             <i class="fas fa-shopping-cart"></i>
                             <span class="cart-count">0</span>
                         </a>
+                    </li>
+                    <li>
+                        <div id="hamburgerAdmin" class="hamburger show">
+                            ☰
+                        </div>
+                        <!-- 📌 Menú desplegable de admin -->
+                        <div id="adminMenu" class="admin-menu">
+                            <ul>
+                                <li><a href="pedidos_metricas.html">Pedidos</a></li>
+                                <li><a href="usuarios.html">Usuarios</a></li>
+                                <li class="submenu">
+                                    <span>Productos ▸</span>
+                                    <ul class="submenu-items">
+                                        <li><a href="editar_productos.html">Editar</a></li>
+                                        <li><a href="AgregarProducto.html">Añadir</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </nav>
@@ -163,181 +183,9 @@
     <script src="js/chatbot.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/orden.js"></script>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-
-        // Tu configuración (la misma de tu login)
-        const firebaseConfig = {
-            apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
-            authDomain: "cuyecitosbd-49824.firebaseapp.com",
-            projectId: "cuyecitosbd-49824",
-            storageBucket: "cuyecitosbd-49824.appspot.com",
-            messagingSenderId: "469768470210",
-            appId: "1:469768470210:web:d9e7f7dc6cf57365c08a6c"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const q = query(collection(db, "usuarios"), where("uid", "==", user.uid));
-                const querySnapshot = await getDocs(q);
-
-                if (!querySnapshot.empty) {
-                    const docSnap = querySnapshot.docs[0];
-                    const rol = docSnap.data().rol;
-                    console.log("Rol del usuario:", rol);
-
-                    if (rol === "admin") {
-                        document.getElementById("btnAgregarProducto").style.display = "block";
-                        document.getElementById("btnEditarProducto").style.display = "block";
-                    } else {
-                        document.getElementById("btnAgregarProducto").style.display = "none";
-                        document.getElementById("btnEditarProducto").style.display = "none";
-                    }
-                } else {
-                    console.warn("Usuario sin rol definido en Firestore.");
-                }
-            } else {
-                // Usuario no autenticado, ocultar paneles de administración
-                document.getElementById("btnAgregarProducto").style.display = "none";
-                document.getElementById("btnEditarProducto").style.display = "none";
-            }
-        });
-
-        // Detectar el botón
-        const btnLogout = document.getElementById("btnLogout");
-
-        // Mostrar/ocultar el botón según la sesión
-        onAuthStateChanged(auth, (user) => {
-            btnLogout.style.display = user ? "inline-block" : "none";
-        });
-
-        // Cerrar sesión al hacer clic
-        if (btnLogout) {
-            btnLogout.addEventListener("click", async () => {
-                try {
-                    await signOut(auth);
-                    localStorage.removeItem("usuario");
-                    alert("👋 Sesión cerrada correctamente");
-                    window.location.href = "index.html";
-                } catch (error) {
-                    alert("❌ Error al cerrar sesión: " + error.message);
-                }
-            });
-        }
-        // --- Mostrar / ocultar botón de cerrar sesión ---
-        onAuthStateChanged(auth, (user) => {
-            if (btnLogout) {
-                if (user) {
-                    btnLogout.style.display = "inline-block"; // mostrar
-                } else {
-                    btnLogout.style.display = "none"; // ocultar
-                }
-            }
-        });
-        const loginLink = document.getElementById("login-link"); // el icono de login
-
-         // --- Mostrar / ocultar botón de cerrar sesión ---
-        document.addEventListener("DOMContentLoaded", () => {
-            const btnLogout = document.getElementById("btnLogout");
-            const loginItem = document.getElementById("login-item");
-            const userNameItem = document.getElementById("user-name");
-            const nombreUsuarioSpan = document.getElementById("nombre-usuario");
-
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    if (loginItem) loginItem.style.display = "none";
-                    if (btnLogout) btnLogout.style.display = "inline-block";
-                    if (userNameItem && nombreUsuarioSpan) {
-                        const nombre = user.displayName || localStorage.getItem("nombreUsuario") || "Usuario";
-                        nombreUsuarioSpan.textContent = nombre;
-                        userNameItem.style.display = "inline-block";
-                    }
-                } else {
-                    if (loginItem) loginItem.style.display = "inline-block";
-                    if (btnLogout) btnLogout.style.display = "none";
-                    if (userNameItem) userNameItem.style.display = "none";
-                }
-            });
-
-            if (btnLogout) {
-                btnLogout.addEventListener("click", async () => {
-                    try {
-                        await signOut(auth);
-                        localStorage.clear();
-                        alert("👋 Sesión cerrada correctamente");
-                        window.location.href = "index.html";
-                    } catch (error) {
-                        alert("❌ Error al cerrar sesión: " + error.message);
-                    }
-                });
-            }
-        });
-
-        document.getElementById("btnAgregarProducto").addEventListener("click", () => {
-            // Redirige a la página de agregar producto
-            window.location.href = "AgregarProducto.html";
-        });
-
-        document.getElementById("btnEditarProducto").addEventListener("click", () => {
-            // Redirige a la página de editar producto
-            window.location.href = "panel_admin.html";
-        });
-
-        async function cargarProductos() {
-            const contenedor = document.getElementById("productos-container");
-            contenedor.innerHTML = "<p>Cargando productos...</p>";
-
-            try {
-                const querySnapshot = await getDocs(collection(db, "productos"));
-                contenedor.innerHTML = ""; // limpiar al terminar de cargar
-
-                querySnapshot.forEach((doc) => {
-                    const producto = doc.data();
-                    const card = document.createElement("div");
-                    card.classList.add("producto-item");
-                    card.setAttribute("data-categoria", producto.categoria);
-
-                    card.innerHTML = `
-                <img src="${producto.imagen}" alt="${producto.nombre}">
-                <h3>${producto.nombre}</h3>
-                <p class="descripcion">${producto.descripcion}</p>
-                <p class="ingredientes"><strong>Ingredientes:</strong> ${producto.ingredientes}</p>
-                <div class="precio-carrito">
-                    <p class="precio">$${producto.precio} MXN</p>
-                    <button class="btn-agregar" data-producto="${producto.nombre}" data-precio="${producto.precio}">
-                        <i class="fas fa-shopping-cart"></i>
-                    </button>
-                </div>
-            `;
-
-                    // Agregar evento al botón después de crear la card
-                    const btnAgregar = card.querySelector(".btn-agregar");
-                    btnAgregar.addEventListener("click", () => {
-                        const nombre = producto.nombre;
-                        const precio = parseFloat(producto.precio);
-                        addToCart(nombre, precio); // llama a tu función existente
-                    });
-
-                    contenedor.appendChild(card);
-                });
-
-            } catch (error) {
-                console.error("Error al cargar productos:", error);
-                contenedor.innerHTML = "<p>Error al cargar los productos 😢</p>";
-            }
-        }
-
-        // Llamar a la función al cargar la página
-        cargarProductos();
-
-    </script>
+    <script type="module" src="js/firebase.js"></script>
+    <script type="module" src="js/productos.js"></script>
+    <script type="module" src="js/index.js"></script>
 </body>
 
 </html>

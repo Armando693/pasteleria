@@ -19,23 +19,42 @@
     <header>
         <div class="container">
             <div class="logo">
-                <img src="postres/Logo-modified.png" alt="Cuyecitos Pastelería">
+                <a href="index.html">
+                    <img src="postres/Logo-modified.png" alt="Cuyecitos Pastelería">
+                </a>
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="index.html" class="active">Inicio</a></li>
                     <li><a href="productos.html">Productos</a></li>
-                    <li><a href="orden.html" class="active">Orden</a></li>
+                    <li><a href="orden.html">Orden</a></li>
                     <li id="login-item"><a href="login.html">👨‍🍳</a></li>
                     <li id="user-name" style="display:none;"><span id="nombre-usuario"></span> 👋</li>
                     <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
-
-
                     <li class="cart-icon">
                         <a href="#" id="cart-toggle">
                             <i class="fas fa-shopping-cart"></i>
                             <span class="cart-count">0</span>
                         </a>
+                    </li>
+                    <li>
+                        <div id="hamburgerAdmin" class="hamburger show">
+                            ☰
+                        </div>
+                        <!-- 📌 Menú desplegable de admin -->
+                        <div id="adminMenu" class="admin-menu">
+                            <ul>
+                                <li><a href="pedidos_metricas.html">Pedidos</a></li>
+                                <li><a href="usuarios.html">Usuarios</a></li>
+                                <li class="submenu">
+                                    <span>Productos ▸</span>
+                                    <ul class="submenu-items">
+                                        <li><a href="editar_productos.html">Editar</a></li>
+                                        <li><a href="AgregarProducto.html">Añadir</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </nav>
@@ -452,182 +471,9 @@
     <script src="js/chatbot.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/orden.js"></script>
-
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-
-        // --- Configuración de Firebase ---
-        const firebaseConfig = {
-            apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
-            authDomain: "cuyecitosbd-49824.firebaseapp.com",
-            projectId: "cuyecitosbd-49824",
-            storageBucket: "cuyecitosbd-49824.appspot.com",
-            messagingSenderId: "612701891221",
-            appId: "1:612701891221:web:2018fc11f6bb77b96f499c"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        // --- Manejo de login/logout ---
-        const loginItem = document.getElementById("login-item");
-        const btnLogout = document.getElementById("btnLogout");
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // Ocultar login, mostrar logout
-                if (loginItem) loginItem.style.display = "none";
-                if (btnLogout) btnLogout.style.display = "inline-block";
-
-                // Autocompletar datos del formulario
-                const nombreInput = document.getElementById("nombre");
-                const emailInput = document.getElementById("email");
-
-                const savedNombre = localStorage.getItem("nombreUsuario");
-                const savedEmail = localStorage.getItem("correoUsuario");
-
-                if (savedNombre && nombreInput) nombreInput.value = savedNombre;
-                if (savedEmail && emailInput) emailInput.value = savedEmail;
-
-                if (!savedNombre && user.displayName && nombreInput) nombreInput.value = user.displayName;
-                if (!savedEmail && user.email && emailInput) emailInput.value = user.email;
-
-            } else {
-                // Usuario no ha iniciado sesión
-                if (loginItem) loginItem.style.display = "inline-block";
-                if (btnLogout) btnLogout.style.display = "none";
-            }
-        });
-
-        // --- Cerrar sesión ---
-        if (btnLogout) {
-            btnLogout.addEventListener("click", async () => {
-                try {
-                    await signOut(auth);
-                    localStorage.clear();
-                    alert("👋 Sesión cerrada correctamente");
-                    window.location.href = "index.html";
-                } catch (error) {
-                    alert("❌ Error al cerrar sesión: " + error.message);
-                }
-            });
-        }
-        // --- Mostrar / ocultar botón de cerrar sesión ---
-        document.addEventListener("DOMContentLoaded", () => {
-            const btnLogout = document.getElementById("btnLogout");
-            const loginItem = document.getElementById("login-item");
-            const userNameItem = document.getElementById("user-name");
-            const nombreUsuarioSpan = document.getElementById("nombre-usuario");
-
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    if (loginItem) loginItem.style.display = "none";
-                    if (btnLogout) btnLogout.style.display = "inline-block";
-                    if (userNameItem && nombreUsuarioSpan) {
-                        const nombre = user.displayName || localStorage.getItem("nombreUsuario") || "Usuario";
-                        nombreUsuarioSpan.textContent = nombre;
-                        userNameItem.style.display = "inline-block";
-                    }
-                } else {
-                    if (loginItem) loginItem.style.display = "inline-block";
-                    if (btnLogout) btnLogout.style.display = "none";
-                    if (userNameItem) userNameItem.style.display = "none";
-                }
-            });
-
-            if (btnLogout) {
-                btnLogout.addEventListener("click", async () => {
-                    try {
-                        await signOut(auth);
-                        localStorage.clear();
-                        alert("👋 Sesión cerrada correctamente");
-                        window.location.href = "index.html";
-                    } catch (error) {
-                        alert("❌ Error al cerrar sesión: " + error.message);
-                    }
-                });
-            }
-        });
-
-        // --- Validación de sesión para pedidos ---
-        onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                alert("⚠️ Debes iniciar sesión para hacer un pedido.");
-                window.location.href = "login.html";
-            }
-        });
-
-        // --- Guardar pedido (tu código original) ---
-        document.getElementById("form-orden").addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            // Validación reCAPTCHA
-            const recaptchaResponse = grecaptcha.getResponse();
-            if (!recaptchaResponse) {
-                alert("Por favor verifica el CAPTCHA antes de enviar el pedido.");
-                return;
-            }
-
-            // Validar carrito
-            if (cart.length === 0) {
-                alert('Tu carrito está vacío. Agrega algunos productos antes de realizar el pedido.');
-                return;
-            }
-
-            const nombre = document.getElementById("nombre").value;
-            const telefono = document.getElementById("telefono").value;
-            const email = document.getElementById("email").value;
-            const fechaEntrega = document.getElementById("fecha-entrega").value;
-            const horaEntrega = document.getElementById("hora-entrega").value;
-            const direccion = document.getElementById("direccion").value;
-            const mensaje = document.getElementById("mensaje").value;
-            const metodoPago = document.getElementById("metodo-pago").value;
-
-            try {
-                await addDoc(collection(db, "pedidos"), {
-                    nombre,
-                    telefono,
-                    email,
-                    fechaEntrega,
-                    horaEntrega,
-                    direccion,
-                    mensaje,
-                    metodoPago,
-                    productos: cart,
-                    extras: extrasSeleccionados,
-                    subtotal: cart.reduce((sum, item) => sum + (item.precio * item.cantidad), 0),
-                    totalExtras: totalExtras,
-                    total: cart.reduce((sum, item) => sum + (item.precio * item.cantidad), 0) + totalExtras,
-                    fechaRegistro: new Date().toISOString(),
-                    recaptchaVerified: true
-                });
-
-                alert("🎉 Pedido enviado correctamente. ¡Gracias por confiar en Cuyecitos!");
-
-                // Limpiar todo
-                cart = [];
-                extrasSeleccionados = [];
-                totalExtras = 0;
-                updateCart();
-                updateExtrasTotal();
-                updateOrderSummary();
-
-                document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => { checkbox.checked = false; });
-                document.getElementById("form-orden").reset();
-                grecaptcha.reset();
-
-            } catch (error) {
-                console.error("Error al guardar pedido:", error);
-                alert("❌ Ocurrió un error al enviar tu pedido. Intenta de nuevo.");
-            }
-        });
-
-    </script>
-
+    <script type="module" src="js/firebase.js"></script>
+    <script type="module" src="js/orden_base.js"></script>
+    <script type="module" src="js/index.js"></script>
 </body>
 
 </html>

@@ -348,8 +348,8 @@ function loadSimpleMap() {
                 
                 <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
                     <a href="https://maps.app.goo.gl/VdDT3MM41K6UtVWaA" 
-                       target="_blank" 
-                       style="background: #ff6b8b; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 5px;">
+                        target="_blank" 
+                        style="background: #ff6b8b; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 5px;">
                         <i class="fas fa-map"></i> Google Maps
                     </a>
                 </div>
