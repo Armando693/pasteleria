@@ -7,7 +7,6 @@
     <title>Cuyecitos - Pastelería Artesanal</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/Estilosgenerales.css">
-    <link rel="stylesheet" href="css/ofertas.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -31,20 +30,35 @@
                     <li id="login-item"><a href="login.html">👨‍🍳</a></li>
                     <li id="user-name" style="display:none;"><span id="nombre-usuario"></span> 👋</li>
                     <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
-
-
                     <li class="cart-icon">
                         <a href="#" id="cart-toggle">
                             <i class="fas fa-shopping-cart"></i>
                             <span class="cart-count">0</span>
                         </a>
                     </li>
-                    <li><a href="admin_usuarios.html">Usuarios</a></li>
+                    <li>
+                        <div id="hamburgerAdmin" class="hamburger show">
+                            ☰
+                        </div>
+                        <!-- 📌 Menú desplegable de admin -->
+                        <div id="adminMenu" class="admin-menu">
+                            <ul>
+                                <li><a href="pedidos_metricas.html">Pedidos</a></li>
+                                <li><a href="usuarios.html">Usuarios</a></li>
+                                <li class="submenu">
+                                    <span>Productos ▸</span>
+                                    <ul class="submenu-items">
+                                        <li><a href="editar_productos.html">Editar</a></li>
+                                        <li><a href="AgregarProducto.html">Añadir</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
-
 
     <!-- Hero Section -->
     <section class="hero">
@@ -135,7 +149,6 @@
         </div>
 
     </section>
-
     <!-- Sobre Nosotros -->
     <section class="sobre-nosotros">
         <div class="container">
@@ -168,7 +181,6 @@
             </div>
         </div>
     </section>
-
     <!-- Testimonios -->
     <section class="testimonios">
         <div class="container">
@@ -286,7 +298,6 @@
             </div>
         </div>
     </section>
-
     <section class="informacion-adicional section-padding">
         <div class="container">
             <h2 class="section-title">Información Adicional</h2>
@@ -432,7 +443,6 @@
             </div>
         </div>
     </section>
-
     <!-- Ubicación -->
     <section class="ubicacion">
         <div class="container">
@@ -448,7 +458,6 @@
         </div>
         </div>
     </section>
-
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -490,7 +499,6 @@
             </div>
         </div>
     </footer>
-
     <!-- Carrito de Compras -->
     <div class="cart-sidebar" id="cart-sidebar">
         <div class="cart-header">
@@ -505,7 +513,6 @@
             <button class="btn-checkout" id="checkout-btn">Realizar Pedido</button>
         </div>
     </div>
-
     <!-- Chatbot -->
     <div class="chatbot-container" id="chatbot-container">
         <div class="chatbot-header">
@@ -523,96 +530,16 @@
             <button id="send-message"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
-
     <!-- Botón para abrir el chatbot -->
     <button class="chatbot-toggle" id="chatbot-toggle">
         <i class="fas fa-comments"></i>
     </button>
-
     <script src="js/principal.js"></script>
     <script src="js/chatbot.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/orden.js"></script>
-
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-        // Tu configuración (la misma de tu login)
-        const firebaseConfig = {
-            apiKey: "AIzaSyC_qgUfDCnZlRhs6MnZTpNDPoJMl5hPEGw",
-            authDomain: "cuyecitosbd-49824.firebaseapp.com",
-            projectId: "cuyecitosbd-49824",
-            storageBucket: "cuyecitosbd-49824.appspot.com",
-            messagingSenderId: "469768470210",
-            appId: "1:469768470210:web:d9e7f7dc6cf57365c08a6c"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        // Detectar el botón
-        const btnLogout = document.getElementById("btnLogout");
-
-        // Mostrar/ocultar el botón según la sesión
-        onAuthStateChanged(auth, (user) => {
-            btnLogout.style.display = user ? "inline-block" : "none";
-        });
-
-        // Cerrar sesión al hacer clic
-        if (btnLogout) {
-            btnLogout.addEventListener("click", async () => {
-                try {
-                    await signOut(auth);
-                    localStorage.removeItem("usuario");
-                    alert("👋 Sesión cerrada correctamente");
-                    window.location.href = "index.html";
-                } catch (error) {
-                    alert("❌ Error al cerrar sesión: " + error.message);
-                }
-            });
-        }
-
-        // --- Mostrar / ocultar botón de cerrar sesión ---
-        document.addEventListener("DOMContentLoaded", () => {
-            const btnLogout = document.getElementById("btnLogout");
-            const loginItem = document.getElementById("login-item");
-            const userNameItem = document.getElementById("user-name");
-            const nombreUsuarioSpan = document.getElementById("nombre-usuario");
-
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    if (loginItem) loginItem.style.display = "none";
-                    if (btnLogout) btnLogout.style.display = "inline-block";
-                    if (userNameItem && nombreUsuarioSpan) {
-                        const nombre = user.displayName || localStorage.getItem("nombreUsuario") || "Usuario";
-                        nombreUsuarioSpan.textContent = nombre;
-                        userNameItem.style.display = "inline-block";
-                    }
-                } else {
-                    if (loginItem) loginItem.style.display = "inline-block";
-                    if (btnLogout) btnLogout.style.display = "none";
-                    if (userNameItem) userNameItem.style.display = "none";
-                }
-            });
-
-            if (btnLogout) {
-                btnLogout.addEventListener("click", async () => {
-                    try {
-                        await signOut(auth);
-                        localStorage.clear();
-                        alert("👋 Sesión cerrada correctamente");
-                        window.location.href = "index.html";
-                    } catch (error) {
-                        alert("❌ Error al cerrar sesión: " + error.message);
-                    }
-                });
-            }
-        });
-
-
-    </script>
+    <script type="module" src="js/firebase.js"></script>
+    <script type="module" src="js/index.js"></script>
 </body>
 
 </html>

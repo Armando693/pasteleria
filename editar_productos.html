@@ -2,10 +2,10 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Producto</title>
-    <link rel="stylesheet" href="css/AgregarProducto.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Administración - Pastelería</title>
+    <link rel="stylesheet" href="css/editar_productos.css">
     <link rel="stylesheet" href="css/Estilosgenerales.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -49,23 +49,10 @@
             </nav>
         </div>
     </header>
-
-    <h2>🧁 Agregar nuevo producto</h2>
-
-    <form id="formProducto">
-        <input type="text" id="nombre" placeholder="Nombre del producto" required>
-        <textarea id="descripcion" placeholder="Descripción" required></textarea>
-        <input type="text" id="ingredientes" placeholder="Ingredientes" required>
-        <input type="number" id="precio" placeholder="Precio (MXN)" required>
-        <input type="text" id="categoria" placeholder="Categoría" required>
-        <input type="number" id="stock" placeholder="Stock disponible" required>
-        <input type="file" id="imagen" accept="image/*" required>
-        <button type="submit" class="agregar">Agregar producto</button>
-    </form>
-
-    <p id="mensaje"></p>
+    <h1>Panel de Administración - Pastelería 🍰</h1>
+    <div id="productos"></div>
     <script type="module" src="js/firebase.js"></script>
-    <script type="module" src="js/AgregarProducto.js"></script>
+    <script type="module" src="js/editar_productos.js"></script>
     <script type="module" src="js/index.js"></script>
 </body>
 

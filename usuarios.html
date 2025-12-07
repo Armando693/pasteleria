@@ -2,12 +2,12 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Producto</title>
-    <link rel="stylesheet" href="css/AgregarProducto.css">
-    <link rel="stylesheet" href="css/Estilosgenerales.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administrar Usuarios</title>
+    <link rel="stylesheet" href="css/usuarios.css" />
+    <link rel="stylesheet" href="css/Estilosgenerales.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -50,22 +50,42 @@
         </div>
     </header>
 
-    <h2>🧁 Agregar nuevo producto</h2>
+    <h2>👥 Panel de administración de usuarios</h2>
+    <p>Aquí puedes buscar, editar correos y cambiar roles de los usuarios registrados.</p>
 
-    <form id="formProducto">
-        <input type="text" id="nombre" placeholder="Nombre del producto" required>
-        <textarea id="descripcion" placeholder="Descripción" required></textarea>
-        <input type="text" id="ingredientes" placeholder="Ingredientes" required>
-        <input type="number" id="precio" placeholder="Precio (MXN)" required>
-        <input type="text" id="categoria" placeholder="Categoría" required>
-        <input type="number" id="stock" placeholder="Stock disponible" required>
-        <input type="file" id="imagen" accept="image/*" required>
-        <button type="submit" class="agregar">Agregar producto</button>
-    </form>
+    <!-- 🔍 Barra de búsqueda -->
+    <input type="text" id="buscador" placeholder="Buscar por nombre o correo..." />
 
-    <p id="mensaje"></p>
+    <table id="tablaUsuarios">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- 🔐 Modal de confirmación de contraseña -->
+    <div id="modalReauth" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-2xl shadow-lg w-80 text-center">
+            <h2 class="text-xl font-semibold mb-3">Verificación de seguridad 🔒</h2>
+            <p class="text-gray-600 mb-4">Por favor, ingresa tu contraseña actual para continuar.</p>
+            <input type="password" id="inputPasswordReauth" class="border border-gray-300 rounded-md p-2 w-full mb-4"
+                placeholder="Contraseña">
+            <div class="flex justify-between">
+                <button id="btnCancelarReauth"
+                    class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded-md">Cancelar</button>
+                <button id="btnConfirmarReauth"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">Confirmar</button>
+            </div>
+        </div>
+    </div>
     <script type="module" src="js/firebase.js"></script>
-    <script type="module" src="js/AgregarProducto.js"></script>
+    <script type="module" src="js/usuarios.js"></script>
     <script type="module" src="js/index.js"></script>
 </body>
 

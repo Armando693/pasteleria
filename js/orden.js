@@ -1,4 +1,3 @@
-// ===== ACTUALIZACIÓN DEL RESUMEN =====
 function updateOrderSummary() {
     console.log('Actualizando resumen del pedido...');
 
@@ -8,7 +7,7 @@ function updateOrderSummary() {
     const resumenExtrasTotal = document.getElementById('resumen-extras-total');
     const resumenTotal = document.getElementById('resumen-total');
 
-    // Actualizar productos
+    // -------- Productos --------
     if (resumenItems) {
         resumenItems.innerHTML = '';
 
@@ -22,9 +21,11 @@ function updateOrderSummary() {
             `;
         } else {
             cart.forEach((item, index) => {
-                const resumenItem = document.createElement('div');
-                resumenItem.className = 'resumen-item-alt';
-                resumenItem.innerHTML = `
+                const div = document.createElement('div');
+                div.className = 'resumen-item-alt';
+                div.dataset.index = index;
+
+                div.innerHTML = `
                     <div class="resumen-item-content-alt">
                         <div class="resumen-item-info">
                             <strong>${item.producto}</strong>
@@ -33,137 +34,93 @@ function updateOrderSummary() {
                         <div class="resumen-item-precio">
                             $${item.precio * item.cantidad} MXN
                         </div>
-                        <button class="remove-resumen-item-alt" data-index="${index}" title="Eliminar">
+                        <button class="remove-resumen-item-alt" title="Eliminar">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
                 `;
-                resumenItems.appendChild(resumenItem);
+                resumenItems.appendChild(div);
             });
-
-            // Configurar eventos para eliminar productos
-            setupResumenEvents();
         }
     }
 
-    // Actualizar extras
+    // -------- Extras --------
     if (resumenExtras) {
         resumenExtras.innerHTML = '';
 
         if (extrasSeleccionados.length > 0) {
-            const extrasTitle = document.createElement('h5');
-            extrasTitle.textContent = 'Personalización:';
-            extrasTitle.style.marginBottom = '15px';
-            extrasTitle.style.color = '#333';
-            resumenExtras.appendChild(extrasTitle);
+            const title = document.createElement('h5');
+            title.textContent = 'Personalización:';
+            title.style.marginBottom = '15px';
+            resumenExtras.appendChild(title);
 
             extrasSeleccionados.forEach((extra, index) => {
-                const extraItem = document.createElement('div');
-                extraItem.className = 'extra-resumen-item-alt';
-                extraItem.innerHTML = `
+                const div = document.createElement('div');
+                div.className = 'extra-resumen-item-alt';
+                div.dataset.index = index;
+
+                div.innerHTML = `
                     <div class="extra-resumen-content-alt">
                         <span>${extra.nombre}</span>
                         <span>+$${extra.precio} MXN</span>
-                        <button class="remove-extra-item-alt" data-index="${index}" title="Eliminar extra">
+                        <button class="remove-extra-item-alt" title="Eliminar extra">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
                 `;
-                resumenExtras.appendChild(extraItem);
-            });
 
-            // Configurar eventos para eliminar extras
-            setupExtrasResumenEvents();
+                resumenExtras.appendChild(div);
+            });
         }
     }
 
-    // Actualizar totales
-    const subtotal = cart.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
-    const totalFinal = subtotal + totalExtras;
+    // -------- Totales --------
+    const subtotal = cart.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
+    const extras = totalExtras || 0;
+    const totalFinal = subtotal + extras;
 
-    if (resumenSubtotal) {
-        resumenSubtotal.textContent = `$${subtotal} MXN`;
-    }
+    if (resumenSubtotal) resumenSubtotal.textContent = `$${subtotal} MXN`;
+    if (resumenExtrasTotal) resumenExtrasTotal.textContent = `$${extras} MXN`;
+    if (resumenTotal) resumenTotal.textContent = `$${totalFinal} MXN`;
 
-    if (resumenExtrasTotal) {
-        resumenExtrasTotal.textContent = `$${totalExtras} MXN`;
-    }
-
-    if (resumenTotal) {
-        resumenTotal.textContent = `$${totalFinal} MXN`;
-    }
-
-    console.log('Resumen actualizado. Productos:', cart.length, 'Extras:', extrasSeleccionados.length);
+    console.log(`Resumen actualizado. Productos: ${cart.length}, Extras: ${extrasSeleccionados.length}`);
 }
 
-function setupResumenEvents() {
-    const resumenItems = document.getElementById('resumen-items');
-    if (resumenItems) {
-        resumenItems.addEventListener('click', function (e) {
-            const target = e.target;
-            const resumenItem = target.closest('.resumen-item-alt');
-
-            if (!resumenItem) return;
-
-            const items = Array.from(resumenItems.querySelectorAll('.resumen-item-alt'));
-            const currentIndex = items.indexOf(resumenItem);
-
-            if (target.classList.contains('remove-resumen-item-alt') || target.closest('.remove-resumen-item-alt')) {
-                removeFromCart(currentIndex);
-            }
-        });
+// =======================
+// EVENTOS CON DELEGACIÓN (evita listeners duplicados)
+// =======================
+document.addEventListener("click", (e) => {
+    // Eliminar productos
+    if (e.target.closest(".remove-resumen-item-alt")) {
+        const index = e.target.closest(".resumen-item-alt").dataset.index;
+        removeFromCart(parseInt(index));
     }
-}
 
-function setupExtrasResumenEvents() {
-    const resumenExtras = document.getElementById('resumen-extras');
-    if (resumenExtras) {
-        resumenExtras.addEventListener('click', function (e) {
-            const target = e.target;
-            const extraItem = target.closest('.extra-resumen-item-alt');
-
-            if (!extraItem) return;
-
-            const items = Array.from(resumenExtras.querySelectorAll('.extra-resumen-item-alt'));
-            const currentIndex = items.indexOf(extraItem);
-
-            if (target.classList.contains('remove-extra-item-alt') || target.closest('.remove-extra-item-alt')) {
-                removeExtra(currentIndex);
-            }
-        });
+    // Eliminar extras
+    if (e.target.closest(".remove-extra-item-alt")) {
+        const index = e.target.closest(".extra-resumen-item-alt").dataset.index;
+        removeExtra(parseInt(index));
     }
-}
+});
 
-// ===== FORMULARIO DE ORDEN =====
-function setupOrderForm() {
-    // Esta función ahora está vacía porque el envío lo maneja Firebase
-    console.log('Formulario de orden - El envío es manejado por Firebase');
-}
-
-// ===== MÉTODO DE PAGO =====
+// =======================
+// MÉTODO DE PAGO + AUTOCOMPLETE SESIÓN
+// =======================
 document.addEventListener("DOMContentLoaded", () => {
+
+    // --- Método de pago ---
     const metodoPago = document.getElementById("metodo-pago");
     const opcionesTarjeta = document.getElementById("opciones-tarjeta");
     const infoTransferencia = document.getElementById("info-transferencia");
 
     if (metodoPago) {
         metodoPago.addEventListener("change", () => {
-            opcionesTarjeta.style.display = "none";
-            infoTransferencia.style.display = "none";
-
-            if (metodoPago.value === "tarjeta") {
-                opcionesTarjeta.style.display = "block";
-            } else if (metodoPago.value === "transferencia") {
-                infoTransferencia.style.display = "block";
-            }
+            opcionesTarjeta.style.display = metodoPago.value === "tarjeta" ? "block" : "none";
+            infoTransferencia.style.display = metodoPago.value === "transferencia" ? "block" : "none";
         });
     }
-});
 
-
-
-// ===== AUTOCOMPLETAR DATOS DEL USUARIO =====
-document.addEventListener("DOMContentLoaded", function () {
+    // --- Autocompletar datos del usuario ---
     const usuarioGuardado = localStorage.getItem("usuario");
 
     if (usuarioGuardado) {
@@ -171,8 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const nombreInput = document.querySelector('input[name="nombre"]');
         const emailInput = document.querySelector('input[name="email"]');
 
-        if (nombreInput && usuario.nombre) nombreInput.value = usuario.nombre;
-        if (emailInput && usuario.email) emailInput.value = usuario.email;
+        if (nombreInput) nombreInput.value = usuario.nombre || "";
+        if (emailInput) emailInput.value = usuario.email || "";
     }
 });
-

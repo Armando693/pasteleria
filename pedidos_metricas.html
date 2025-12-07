@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración - Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <link rel="stylesheet" href="css/pedidos_metricas.css">
+    <link rel="stylesheet" href="/css/Estilosgenerales.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="postres/Logo-modified.png" alt="Cuyecitos Pastelería">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Inicio</a></li>
+                    <li><a href="productos.html">Productos</a></li>
+                    <li><a href="orden.html">Orden</a></li>
+                    <li id="login-item"><a href="login.html">👨‍🍳</a></li>
+                    <li id="user-name" style="display:none;"><span id="nombre-usuario"></span> 👋</li>
+                    <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
+                    <li>
+                        <div id="hamburgerAdmin" class="hamburger show">
+                            ☰
+                        </div>
+                        <!-- 📌 Menú desplegable de admin -->
+                        <div id="adminMenu" class="admin-menu">
+                            <ul>
+                                <li><a href="pedidos_metricas.html">Pedidos</a></li>
+                                <li><a href="usuarios.html">Usuarios</a></li>
+                                <li class="submenu">
+                                    <span>Productos ▸</span>
+                                    <ul class="submenu-items">
+                                        <li><a href="editar_productos.html">Editar</a></li>
+                                        <li><a href="AgregarProducto.html">Añadir</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="dashboard-header">
+        <h1>Ventas</h1>
+        <p>Análisis en tiempo real y predicciones de ventas</p>
+    </div>
+
+    <!-- KPIs Principales -->
+    <div class="kpi-container">
+        <div class="kpi-box">
+            <h3>Ventas Totales</h3>
+            <div class="kpi-value" id="ventasTotales">Cargando...</div>
+            <div class="kpi-label">Todos los pedidos</div>
+        </div>
+
+        <div class="kpi-box success">
+            <h3>Producto Más Vendido</h3>
+            <div class="kpi-value" id="topProduct">Cargando...</div>
+            <div class="kpi-label">En unidades</div>
+        </div>
+
+        <div class="kpi-box warning">
+            <h3>Producto Menos Vendido</h3>
+            <div class="kpi-value" id="worstProduct">Cargando...</div>
+            <div class="kpi-label">Necesita atención</div>
+        </div>
+
+        <div class="kpi-box">
+            <h3>Total Pedidos</h3>
+            <div class="kpi-value" id="totalOrders">Cargando...</div>
+            <div class="kpi-label">Todos los tiempos</div>
+        </div>
+    </div>
+
+    <!-- Tabla de Pedidos -->
+    <div class="pedidos-section">
+        <h2>Lista de Pedidos</h2>
+        <div id="tablaLoading" class="loading">Cargando pedidos...</div>
+        <table class="pedidos-table" id="tablaPedidos" style="display: none;">
+            <thead>
+                <tr>
+                    <th>ID Pedido</th>
+                    <th>Cliente</th>
+                    <th>Fecha Pedido</th>
+                    <th>Fecha Entrega</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTablaPedidos">
+                <!-- Los datos se llenarán con JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Gráficas -->
+    <div class="chart-container">
+        <h2>Análisis de Ventas</h2>
+        <div class="chart-row">
+            <div>
+                <h3>Ventas por Producto</h3>
+                <canvas id="chartProductos" width="400" height="300"></canvas>
+            </div>
+            <div>
+                <h3>Tendencia Mensual</h3>
+                <canvas id="chartMensual" width="400" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Análisis Predictivo -->
+    <div class="prediction-section">
+        <h2>Predicciones para el próximo Mes</h2>
+        <div id="predictionStatus">Calculando predicciones...</div>
+        <div class="prediction-cards" id="predictionCards"></div>
+    </div>
+
+    <!-- Modal para detalles del pedido -->
+    <div class="modal" id="modalDetalles">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Detalles del Pedido</h2>
+                <button class="close-btn" id="cerrarModal">&times;</button>
+            </div>
+            <div id="detallesPedido">
+                <!-- Los detalles se llenarán con JavaScript -->
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/firebase.js"></script>
+    <script type="module" src="js/pedidos_metricas.js"></script>
+    <script type="module" src="js/index.js"></script>
+</body>
+
+</html>
