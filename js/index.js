@@ -51,7 +51,7 @@ onAuthStateChanged(auth, async (user) => {
 
         // Ocultar hamburguesa
         if (hamburger) hamburger.classList.remove("show");
-        if (adminMenu) adminMenu.classList.add("show");
+        if (adminMenu) adminMenu.classList.remove("show");
     }
 });
 
